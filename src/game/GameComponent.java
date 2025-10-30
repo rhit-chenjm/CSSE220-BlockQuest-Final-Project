@@ -139,5 +139,5 @@ public class GameComponent extends JComponent {
 	public void createRainDrop(Double boundingBox) {
 		this.drops.add(new DamagingDrop(boundingBox, this));
 	}
-
+	//e
 }
