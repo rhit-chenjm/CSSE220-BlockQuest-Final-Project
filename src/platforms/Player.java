@@ -3,6 +3,7 @@ package platforms;
 import java.awt.Graphics2D;
 
 import game.GameComponent;
+import game.GameObject;
 /**
  * A Platform that moves around the screen and absorbs Drops.
  * 
@@ -10,7 +11,7 @@ import game.GameComponent;
  * it stops there. If the user pressed a button the platform switches its current direction
  *
  */
-public class UserControlledPlatform extends AbstractPlatform {
+public class Player extends GameObject {
 
 	public static final int SIZE = 25;
 	private static final int STARTING_DX = 3;
@@ -22,12 +23,12 @@ public class UserControlledPlatform extends AbstractPlatform {
 	
 	//TODO: could add a color that changes each time the box gets hit by drops
 	
-	public UserControlledPlatform(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent) {
-		super(x, y, xVelocity, yVelocity, gameComponent,SIZE , SIZE);
+	public Player(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent) {
+		super(gameComponent,x, y, xVelocity, yVelocity, SIZE , SIZE);
 	}
 
-	public UserControlledPlatform(int width, int height, GameComponent gameComponent) {
-		super(BOX_X, BOX_Y, STARTING_DX, STARTING_DY, gameComponent, SIZE, SIZE);
+	public Player(int width, int height, GameComponent gameComponent) {
+		super(gameComponent, BOX_X, BOX_Y, STARTING_DX, STARTING_DY, SIZE, SIZE);
 	}
 
 
@@ -45,6 +46,14 @@ public class UserControlledPlatform extends AbstractPlatform {
 		
 	}
 
+	public void setXSpeed(double c1) {
+		super.xVelocity = c1;
+	}
+	public void setYSpeed(double c1) {
+		super.yVelocity = c1;
+	}
+	
+	
 	
 	@Override
 	public void collideWithPlatform(AbstractPlatform otherPlatform) {
@@ -65,19 +74,7 @@ public class UserControlledPlatform extends AbstractPlatform {
 	
 	
 
-	//Methods shared with BouncingPlatform but not with GameObject
-	@Override
-	public void removeDrop() {
-		//do nothing
-	}
-	@Override
-	public void addDrop() {
-		//do nothing
-	}
-	@Override
-	public void makeInvinciple() {
-		//do nothing
-	}
+
 
 
 }

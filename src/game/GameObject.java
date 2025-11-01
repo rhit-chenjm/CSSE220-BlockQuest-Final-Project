@@ -7,12 +7,12 @@ import platforms.AbstractPlatform;
 // TODO: Refactor Raindrop, Platform, (and hopefully that lone box?) into GameObjects.
 public abstract class GameObject {
 	
-	private double x, y;
-	private double yVelocity;
-	private double xVelocity;
+	protected double x, y;
+	protected double yVelocity;
+	protected double xVelocity;
 	private boolean shouldRemove;
-	private double width;
-	private double height;
+	protected double width;
+	protected double height;
 	protected GameComponent gameComponent;
 	
 	

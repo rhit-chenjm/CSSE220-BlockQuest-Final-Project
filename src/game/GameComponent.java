@@ -13,7 +13,7 @@ import drops.InvincibilityDrop;
 import entities.Platform;
 import platforms.AbstractPlatform;
 import platforms.BouncingPlatform;
-import platforms.UserControlledPlatform;
+import platforms.Player;
 
 public class GameComponent extends JComponent {
 	// Here is the game state. In a bigger game, this would live
@@ -26,7 +26,7 @@ public class GameComponent extends JComponent {
 	
 	//this gets stored in the list above but easier to access directly since there is one of them
 	//than to have to look through an find it
-	private UserControlledPlatform userPlatform;
+	private Player player;
 
 	private Platform testPlatform;
 	
@@ -38,9 +38,8 @@ public class GameComponent extends JComponent {
 
 		this.testPlatform = new Platform(30, 200, 200, 20);
 		
-		this.userPlatform =  new UserControlledPlatform(10, 0, this);
+		this.player =  new Player(10, 0, this);
 	
-		this.platforms.add( this.userPlatform );
 		
 		this.platforms.add(new BouncingPlatform(200, 100, 5, 0, this));
 		this.platforms.add(new BouncingPlatform(30,  100, 0, 5, this));
@@ -50,8 +49,8 @@ public class GameComponent extends JComponent {
 
 	public void drawScreen() {
 		this.repaint();
-		System.out.println("Tick " + this.numTicks);
-		System.out.println("There are " + this.drops.size() + " drops.");
+//		System.out.println("Tick " + this.numTicks);
+//		System.out.println("There are " + this.drops.size() + " drops.");
 	}
 
 	@Override
@@ -65,7 +64,7 @@ public class GameComponent extends JComponent {
 		for (AbstractPlatform platform : this.platforms) {
 			platform.drawOn(g2);
 		}
-		
+		this.player.drawOn(g2);
 		this.testPlatform.drawOn(g2);
 	}
 
@@ -74,6 +73,7 @@ public class GameComponent extends JComponent {
 		updateRaindrops();
 		updatePlatforms();
 		handleCollisions();
+		updatePlayer();
 		this.numTicks++;
 	}
 
@@ -138,13 +138,25 @@ public class GameComponent extends JComponent {
 			platform.update();
 		}
 	}
+	private void updatePlayer() {
+		this.player.update();
+	}
 		
 	public void toggleBoxDirection() {
-		this.userPlatform.reverseDirection();
+		this.player.reverseDirection();
+	}
+	
+	public void setPlayerXSpeed(double c) {
+		this.player.setXSpeed(c);
 	}
 
 	public void createRainDrop(Double boundingBox) {
 		this.drops.add(new DamagingDrop(boundingBox, this));
 	}
 	//e
+
+	public void setPlayerYSpeed(int i) {
+		// TODO Auto-generated method stub
+		this.player.setYSpeed(i);
+	}
 }

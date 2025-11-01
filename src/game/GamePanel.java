@@ -16,15 +16,48 @@ public class GamePanel extends JPanel {
 //		this.setBackground(GameComponent.BG);
 		this.add(canvas,BorderLayout.CENTER);
 		this.addKeyListener(new KeyAdapter() {
+			
             @Override
             public void keyPressed(KeyEvent e) {
+            	
+            	
+            	
+            	System.out.println(e.getKeyCode());
+            	
                 switch (e.getKeyCode()) {
-                    case KeyEvent.VK_LEFT  -> canvas.toggleBoxDirection();
-                    case KeyEvent.VK_RIGHT -> canvas.toggleBoxDirection();
-                    case KeyEvent.VK_SPACE -> {
-//                        if (canvas.timer.isRunning()) canvas.stop();
-//                        else canvas.start();
-                    }
+                    case KeyEvent.VK_LEFT: 
+                    	if (e.getKeyCode()==KeyEvent.VK_LEFT) {
+                        	canvas.setPlayerXSpeed(-1);
+                        	canvas.setPlayerYSpeed(0);
+                        	break;
+                    	}
+                    	else
+                        break;
+
+                    case KeyEvent.VK_RIGHT: 
+                    	canvas.setPlayerXSpeed(1);
+                    	canvas.setPlayerYSpeed(0);
+                    	break;
+                    case KeyEvent.VK_UP: 
+                    	canvas.setPlayerXSpeed(0);
+
+                    	canvas.setPlayerYSpeed(-1);
+                    	break;
+                    case KeyEvent.VK_DOWN:
+                    	canvas.setPlayerXSpeed(0);
+
+                    	canvas.setPlayerYSpeed(1);
+                    	break;
+                    	
+                    case KeyEvent.KEY_RELEASED:
+                    	canvas.setPlayerXSpeed(0);
+                    	canvas.setPlayerYSpeed(0);
+                    	break;
+   
+                    default:
+                    	canvas.setPlayerXSpeed(0);
+                    	canvas.setPlayerYSpeed(0);
+                    	break;
                  // In GamePanel.keyPressed (add a new case)
 
                 }
