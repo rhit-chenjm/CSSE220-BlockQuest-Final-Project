@@ -1,5 +1,7 @@
 package entities;
 
+import java.awt.Graphics2D;
+
 /**
  * Ensures that all classes implementing Drawable have the draw() method.
  * 
@@ -7,6 +9,6 @@ package entities;
  */
 public interface Drawable {
 
-	public void draw();
+	public void drawOn(Graphics2D g2);
 	
 }

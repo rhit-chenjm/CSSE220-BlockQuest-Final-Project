@@ -1,6 +1,7 @@
 package game;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D.Double;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import drops.AbstractDrop;
 import drops.DamagingDrop;
 import drops.HealingDrop;
 import drops.InvincibilityDrop;
+import entities.Platform;
 import platforms.AbstractPlatform;
 import platforms.BouncingPlatform;
 import platforms.UserControlledPlatform;
