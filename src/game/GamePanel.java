@@ -26,13 +26,10 @@ public class GamePanel extends JPanel {
             	
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT: 
-                    	if (e.getKeyCode()==KeyEvent.VK_LEFT) {
-                        	canvas.setPlayerXSpeed(-1);
-                        	canvas.setPlayerYSpeed(0);
-                        	break;
-                    	}
-                    	else
+                        canvas.setPlayerXSpeed(-1);
+                        canvas.setPlayerYSpeed(0);
                         break;
+
 
                     case KeyEvent.VK_RIGHT: 
                     	canvas.setPlayerXSpeed(1);
