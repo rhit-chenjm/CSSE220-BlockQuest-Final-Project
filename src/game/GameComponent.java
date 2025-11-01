@@ -1,10 +1,15 @@
 package game;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D.Double;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import drops.AbstractDrop;
 import drops.DamagingDrop;
@@ -35,12 +40,12 @@ public class GameComponent extends JComponent {
 
 
 	public GameComponent() {
-
+		
 		this.testPlatform = new Platform(30, 200, 200, 20);
 		
 		this.player =  new Player(10, 0, this);
 	
-		
+
 		this.platforms.add(new BouncingPlatform(200, 100, 5, 0, this));
 		this.platforms.add(new BouncingPlatform(30,  100, 0, 5, this));
 		this.platforms.add(new BouncingPlatform(130, 150, 0, 5, this));
@@ -49,8 +54,7 @@ public class GameComponent extends JComponent {
 
 	public void drawScreen() {
 		this.repaint();
-//		System.out.println("Tick " + this.numTicks);
-//		System.out.println("There are " + this.drops.size() + " drops.");
+
 	}
 
 	@Override
