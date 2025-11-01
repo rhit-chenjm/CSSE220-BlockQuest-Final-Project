@@ -59,7 +59,7 @@ public class BouncingPlatform extends AbstractPlatform {
 	@Override
 	public void onRemove() {
 		for (int i = 0; i < DROPS_ON_EXPLODE; i++) {
-			this.gameComponent.createRainDrop(this.getBoundingBox());
+//			this.gameComponent.createRainDrop(this.getBoundingBox());
 		}
 	}
 	

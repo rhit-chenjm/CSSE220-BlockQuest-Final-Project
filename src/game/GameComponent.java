@@ -46,10 +46,6 @@ public class GameComponent extends JComponent {
 		this.player =  new Player(10, 0, this);
 	
 
-		this.platforms.add(new BouncingPlatform(200, 100, 5, 0, this));
-		this.platforms.add(new BouncingPlatform(30,  100, 0, 5, this));
-		this.platforms.add(new BouncingPlatform(130, 150, 0, 5, this));
-		this.platforms.add(new BouncingPlatform(230, 200, 0, 5, this));
 	}
 
 	public void drawScreen() {
@@ -124,17 +120,17 @@ public class GameComponent extends JComponent {
 	}
 
 	private void updateRaindrops() {
-		double rand = Math.random();
-		if (rand < DAMAGE_DROPS_PERC) {
-			this.drops.add(new DamagingDrop(this.getWidth(), this));
-		} else if (rand < DAMAGE_DROPS_PERC + HEALING_DROPS_PERC) {
-			this.drops.add(new HealingDrop(this.getWidth(), this));
-		} else {
-			this.drops.add(new InvincibilityDrop(this.getWidth(), this));
-		}
-		for (AbstractDrop drop : this.drops) {
-			drop.update();
-		}
+//		double rand = Math.random();
+//		if (rand < DAMAGE_DROPS_PERC) {
+//			this.drops.add(new DamagingDrop(this.getWidth(), this));
+//		} else if (rand < DAMAGE_DROPS_PERC + HEALING_DROPS_PERC) {
+//			this.drops.add(new HealingDrop(this.getWidth(), this));
+//		} else {
+//			this.drops.add(new InvincibilityDrop(this.getWidth(), this));
+//		}
+//		for (AbstractDrop drop : this.drops) {
+//			drop.update();
+//		}
 	}
 
 	private void updatePlatforms() {
@@ -162,5 +158,8 @@ public class GameComponent extends JComponent {
 	public void setPlayerYSpeed(int i) {
 		// TODO Auto-generated method stub
 		this.player.setYSpeed(i);
+	}
+	public void addPlayerYSpeed(double i) {
+		this.player.addYSpeed(i);
 	}
 }

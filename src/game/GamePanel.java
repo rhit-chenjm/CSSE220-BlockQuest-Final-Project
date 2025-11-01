@@ -22,42 +22,29 @@ public class GamePanel extends JPanel {
             	
             	
             	
-            	System.out.println(e.getKeyCode());
             	
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_LEFT: 
-                        canvas.setPlayerXSpeed(-1);
-                        canvas.setPlayerYSpeed(0);
-                        break;
-
-
-                    case KeyEvent.VK_RIGHT: 
-                    	canvas.setPlayerXSpeed(1);
-                    	canvas.setPlayerYSpeed(0);
-                    	break;
-                    case KeyEvent.VK_UP: 
-                    	canvas.setPlayerXSpeed(0);
-
-                    	canvas.setPlayerYSpeed(-1);
-                    	break;
-                    case KeyEvent.VK_DOWN:
-                    	canvas.setPlayerXSpeed(0);
-
-                    	canvas.setPlayerYSpeed(1);
-                    	break;
-                    	
-                    case KeyEvent.KEY_RELEASED:
-                    	canvas.setPlayerXSpeed(0);
-                    	canvas.setPlayerYSpeed(0);
-                    	break;
-   
-                    default:
-                    	canvas.setPlayerXSpeed(0);
-                    	canvas.setPlayerYSpeed(0);
-                    	break;
+            	System.out.println(e.getKeyCode());
+            	if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    canvas.setPlayerXSpeed(-10);
+                    canvas.setPlayerYSpeed(0);
+            	} else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+                	canvas.setPlayerXSpeed(10);
+                	canvas.setPlayerYSpeed(0);
+            	} else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+                	canvas.setPlayerXSpeed(0);
+                	canvas.setPlayerYSpeed(10);
+            	}else if(e.getKeyCode() == KeyEvent.VK_UP){
+                	canvas.setPlayerXSpeed(0);
+                	canvas.setPlayerYSpeed(-10);
+            	} else {
+            		canvas.setPlayerXSpeed(0);
+            		canvas.setAlignmentY(0);
+            		
+            	}
+            	e.setKeyCode(0);
                  // In GamePanel.keyPressed (add a new case)
 
-                }
+                
             }
         });
 		setFocusable(true);          // must be focusable to get keys

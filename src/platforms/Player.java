@@ -38,6 +38,8 @@ public class Player extends GameObject {
 	@Override
 	public void update() {
 		super.update();
+		this.xVelocity = 0;
+		this.yVelocity = 0;
 		if ( isOffScreen()  ) {
 			this.reverseDirection();
 			super.update();
@@ -51,6 +53,12 @@ public class Player extends GameObject {
 	}
 	public void setYSpeed(double c1) {
 		super.yVelocity = c1;
+	}
+	public void addYSpeed(double c1) {
+		super.yVelocity += c1;
+	}
+	public double getYSpeed() {
+		return super.yVelocity;
 	}
 	
 	
