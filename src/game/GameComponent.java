@@ -27,6 +27,8 @@ public class GameComponent extends JComponent {
 	//this gets stored in the list above but easier to access directly since there is one of them
 	//than to have to look through an find it
 	private UserControlledPlatform userPlatform;
+
+	private Platform testPlatform;
 	
 	private static final double DAMAGE_DROPS_PERC = 0.8;
 	private static final double HEALING_DROPS_PERC = 0.18;
@@ -34,8 +36,9 @@ public class GameComponent extends JComponent {
 
 	public GameComponent() {
 
-		this.userPlatform =  new UserControlledPlatform(10, 0, this);
+		this.testPlatform = new Platform(30, 200, 200, 20);
 		
+		this.userPlatform =  new UserControlledPlatform(10, 0, this);
 	
 		this.platforms.add( this.userPlatform );
 		
@@ -62,6 +65,8 @@ public class GameComponent extends JComponent {
 		for (AbstractPlatform platform : this.platforms) {
 			platform.drawOn(g2);
 		}
+		
+		this.testPlatform.drawOn(g2);
 	}
 
 	public void updateState() {
