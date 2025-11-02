@@ -95,7 +95,7 @@ public class GameComponent extends JComponent {
 				}
 			}
 		}
-		
+		//test line
 		boolean pGravChanged = false;
 		for (entities.Platform p: platforms) {
 			if (!pGravChanged) {
