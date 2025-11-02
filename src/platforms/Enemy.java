@@ -38,19 +38,17 @@ public class Enemy extends Entity {
 	@Override
 	public void update() {
 		if ( isOffScreen() == 1 ) {
-			this.xVelocity = 0;
+			this.xVelocity = -this.xVelocity;
 			this.x = 0;
 		} else if(isOffScreen() == 2) {
+			this.xVelocity = -this.xVelocity;
 			this.x = super.gameComponent.getWidth()-super.width;
-			this.xVelocity = 0;
 		} else if(isOffScreen() == 3) {
-			this.yVelocity = 0;
+			this.yVelocity = -this.yVelocity;
 			this.y = 0;
-			this.gravity = 0;
 		} else if(isOffScreen() == 4) {
+			this.yVelocity = -this.yVelocity;
 			this.y = super.gameComponent.getHeight()-super.height;
-			this.yVelocity = 0;
-			this.gravity = 0;
 		}
 		this.yVelocity += 0.05*gravity;
 

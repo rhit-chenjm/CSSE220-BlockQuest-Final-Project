@@ -11,10 +11,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
-import drops.AbstractDrop;
-import drops.DamagingDrop;
-import drops.HealingDrop;
-import drops.InvincibilityDrop;
+
 import entities.Platform;
 import platforms.Entity;
 import platforms.Enemy;
