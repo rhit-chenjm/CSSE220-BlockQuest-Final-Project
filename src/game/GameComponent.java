@@ -18,6 +18,7 @@ import javax.swing.JComponent;
 //import drops.InvincibilityDrop;
 import entities.Platform;
 import platforms.Entity;
+import platforms.Collectable;
 import platforms.Enemy;
 import platforms.Player;
 
@@ -29,17 +30,30 @@ public class GameComponent extends JComponent {
 	
 //	private List<AbstractDrop> drops = new ArrayList<>();
 	private List<Entity> enemies = new ArrayList<>();
+	
 	private Player player;
+	
 	private List<Platform> platforms = new ArrayList<>();
 	private Platform testPlatform;
 	private Platform lowTestPlatform;
 
+	private List<Collectable> collectables = new ArrayList<>();
+	private Collectable testHighCollectable;
+	private Collectable testLowCollectable;
+	
 	public GameComponent() {
 		
 		this.testPlatform = new Platform(30, 200, 200, 20);
 		this.lowTestPlatform = new Platform(250, 400, 300, 20);
 		this.platforms.add(this.testPlatform);
 		this.platforms.add(this.lowTestPlatform);
+		
+//		this.testHighCollectable = new Collectable 
+		this.testLowCollectable = new Collectable(300, 100, 0, 0, this);
+		this.testHighCollectable = new Collectable (100, 80, 0, 0, this);
+		this.collectables.add(this.testLowCollectable);
+		this.collectables.add(this.testHighCollectable);
+				
 		this.player =  new Player(10, 0, this);
 	
 		this.enemies.add(new Enemy(200, 100, 5, 0, this));
@@ -66,6 +80,9 @@ public class GameComponent extends JComponent {
 		this.player.drawOn(g2);
 		for (Platform platform : this.platforms) {
 			platform.drawOn(g2);
+		}
+		for (Collectable collectable : this.collectables) {
+			collectable.drawOn(g2);
 		}
 
 	}
