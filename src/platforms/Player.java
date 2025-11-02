@@ -3,6 +3,8 @@ package platforms;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 import entities.Platform;
 import game.GameComponent;
@@ -26,6 +28,7 @@ public class Player extends GameObject {
 	private static final int BOX_Y = 200;
 	private boolean isTouchingPlatform;
 	private Rectangle r1;
+	private int lives = 0;
 	
 	//TODO: could add a color that changes each time the box gets hit by drops
 	
@@ -33,13 +36,14 @@ public class Player extends GameObject {
 		super(gameComponent,x, y, xVelocity, yVelocity, SIZE , SIZE);
 		isTouchingPlatform = false;
 		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
+		lives = 3;
 	}
 
 	public Player(int width, int height, GameComponent gameComponent) {
 		super(gameComponent, BOX_X, BOX_Y, STARTING_DX, STARTING_DY, SIZE, SIZE);
 		isTouchingPlatform = false;
 		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
-
+		lives = 3;
 
 	}
 
@@ -54,7 +58,7 @@ public class Player extends GameObject {
 			this.x = 0;
 		} else if(isOffScreen() == 2) {
 			this.xVelocity = 0;
-			this.x = super.gameComponent.getWidth()-super.width;
+			this.x = super.gameComponent.getWidth()-super.width -4;
 		} else if(isOffScreen() == 3) {
 			this.yVelocity = 0;
 			this.y = 0;
@@ -72,9 +76,7 @@ public class Player extends GameObject {
 		}
 
 		this.yVelocity += 0.05 * gravity;
-
-		
-		super.update();
+			super.update();
 
 		
 	}
@@ -95,8 +97,20 @@ public class Player extends GameObject {
 		super.y += c1;
 	}
 	
-	
-	
+	public void subtractLife() {
+		this.lives -= 1;
+	}
+	public void collideWithEnemy(Enemy e) {
+		if(super.overlapsGameObject(e)) {
+			subtractLife();
+			System.out.println("hit");
+		}
+	}
+	public void checkForEnemyCollision(List<Enemy> enemies) {
+		for (Enemy e1 : enemies) {
+			collideWithEnemy(e1);
+		}
+	}
 	@Override
 	public void collideWithPlatform( Platform other) {
 		if(other.collidesWith(r1)) {

@@ -27,7 +27,7 @@ public class GamePanel extends JPanel {
                     	canvas.setPlayerXSpeed(2);
                     	break;
                     case KeyEvent.VK_UP: 
-                    	
+                  
                     	canvas.setPlayerYSpeed(-2);
                     	break;
                     default:

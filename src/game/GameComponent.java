@@ -26,8 +26,7 @@ public class GameComponent extends JComponent {
 	private int numTicks;
 
 	// There are two types of objects with 6 subtypes
-	private List<AbstractDrop> drops = new ArrayList<>();
-	private List<Entity> enemies = new ArrayList<>();
+	private List<Enemy> enemies = new ArrayList<>();
 	
 	//this gets stored in the list above but easier to access directly since there is one of them
 	//than to have to look through an find it
@@ -123,6 +122,8 @@ public class GameComponent extends JComponent {
 			}
 			else player.gravity = 1;
 		}
+		this.player.checkForEnemyCollision(enemies);
+
 		
 		
 		
@@ -136,12 +137,7 @@ public class GameComponent extends JComponent {
 				shouldRemove.add(object);
 			}
 		}
-		
-		for(GameObject object: shouldRemove){
-			this.drops.remove(object);
-			this.enemies.remove(object);
-			object.onRemove();
-		}
+
 	}
 
 	private void updateRaindrops() {

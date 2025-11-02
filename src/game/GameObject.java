@@ -1,9 +1,11 @@
 package game;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 import entities.Platform;
+import platforms.Enemy;
 import platforms.Entity;
 
 // TODO: Refactor Raindrop, Platform, (and hopefully that lone box?) into GameObjects.
@@ -17,6 +19,8 @@ public abstract class GameObject {
 	protected double height;
 	protected GameComponent gameComponent;
 	private int gravity;
+	private Rectangle boundingBox;
+
 	
 	
 	public GameObject(GameComponent gameComponent, double x, double y, double dx, double dy, double width, double height) {
@@ -27,6 +31,7 @@ public abstract class GameObject {
 		this.gameComponent = gameComponent;
 		this.width = width;
 		this.height = height;
+		this.boundingBox = new Rectangle((int) x, (int) y, (int) width, (int) height);
 	}
 	
 	public abstract void onRemove();
@@ -73,6 +78,9 @@ public abstract class GameObject {
 	public boolean overlaps(Platform p) {
 		return getBoundingBox().intersects(p.getBoundingBox());
 	}
+	public boolean overlapsGameObject(GameObject o) {
+		return getBoundingBox().intersects(o.getBoundingBox());
+	}
 	
 	public int isOffScreen() {
 		boolean xLow = x <0;
@@ -97,6 +105,8 @@ public abstract class GameObject {
 	}
 	
 	public abstract void collideWithPlatform(Platform platform);
+
+
 
 
 }
