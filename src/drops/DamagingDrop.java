@@ -3,8 +3,9 @@ package drops;
 import java.awt.Color;
 import java.awt.geom.Rectangle2D.Double;
 
+import entities.Platform;
 import game.GameComponent;
-import platforms.AbstractPlatform;
+import platforms.Entity;
 /**
  *  This class represents a blue drop that when
  *  hitting a bouncing platform should add a raindrop to it
@@ -23,9 +24,15 @@ public class DamagingDrop extends AbstractDrop{
 		super(width, component, COLOR, SIZE);
 	}
 
-	public void collideWithPlatform( AbstractPlatform other) {
+	public void collideWithPlatform( Entity other) {
 		other.addDrop();
 		markToRemove();
+	}
+
+	@Override
+	public void collideWithPlatform(Platform platform) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

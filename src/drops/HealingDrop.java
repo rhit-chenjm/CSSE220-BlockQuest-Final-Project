@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.geom.Rectangle2D.Double;
 
 import game.GameComponent;
-import platforms.AbstractPlatform;
+import platforms.Entity;
 /**
  *  This class represents a red drop that when
  *  hitting a bouncing platform should remove a raindrop from it
@@ -23,7 +23,7 @@ public class HealingDrop extends AbstractDrop {
 		super(width, component, COLOR, SIZE);
 	}
 	
-	public void collideWithPlatform( AbstractPlatform other) {
+	public void collideWithPlatform( Entity other) {
 		other.removeDrop();
 		markToRemove();
 	}

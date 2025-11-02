@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.geom.Rectangle2D.Double;
 
 import game.GameComponent;
-import platforms.AbstractPlatform;
+import platforms.Entity;
 /**
  *  This class represents a yellow drop that when
  *  hitting a bouncing platform should make it invincible
@@ -23,7 +23,7 @@ public class InvincibilityDrop  extends AbstractDrop{
 		super(width, component, COLOR, SIZE);
 	}
 	
-	public void collideWithPlatform( AbstractPlatform other) {
+	public void collideWithPlatform( Entity other) {
 		other.makeInvinciple();
 		markToRemove();
 	}

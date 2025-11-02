@@ -2,6 +2,7 @@ package platforms;
 
 import java.awt.Graphics2D;
 
+import entities.Platform;
 import game.GameComponent;
 import game.GameObject;
 /**
@@ -12,7 +13,8 @@ import game.GameObject;
  *
  */
 public class Player extends GameObject {
-
+	
+	public int gravity = 0;
 	public static final int SIZE = 25;
 	private static final int STARTING_DX = 3;
 	private static final int STARTING_DY = 0;
@@ -56,9 +58,9 @@ public class Player extends GameObject {
 	
 	
 	@Override
-	public void collideWithPlatform(AbstractPlatform otherPlatform) {
-		//do nothing
-		//this.reverseDirection();
+	public void collideWithPlatform( Platform other) {
+		if (this.yVelocity > 0) this.yVelocity = 0;
+		this.gravity = 0;
 	}
 	
 	

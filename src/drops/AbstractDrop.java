@@ -6,7 +6,7 @@ import java.awt.geom.Rectangle2D;
 
 import game.GameComponent;
 import game.GameObject;
-import platforms.AbstractPlatform;
+import platforms.Entity;
 
 public abstract class AbstractDrop extends GameObject {
 	
@@ -44,7 +44,7 @@ public abstract class AbstractDrop extends GameObject {
 		// Do nothing special.
 	}
 
-	public abstract void collideWithPlatform( AbstractPlatform other) ;
+	public abstract void collideWithPlatform( Entity other) ;
 	
 	
 }

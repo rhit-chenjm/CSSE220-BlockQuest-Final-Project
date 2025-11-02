@@ -16,8 +16,8 @@ import drops.DamagingDrop;
 import drops.HealingDrop;
 import drops.InvincibilityDrop;
 import entities.Platform;
-import platforms.AbstractPlatform;
-import platforms.BouncingPlatform;
+import platforms.Entity;
+import platforms.Enemy;
 import platforms.Player;
 
 public class GameComponent extends JComponent {
@@ -27,13 +27,17 @@ public class GameComponent extends JComponent {
 
 	// There are two types of objects with 6 subtypes
 	private List<AbstractDrop> drops = new ArrayList<>();
-	private List<AbstractPlatform> platforms = new ArrayList<>();
+	private List<Entity> enemies = new ArrayList<>();
 	
 	//this gets stored in the list above but easier to access directly since there is one of them
 	//than to have to look through an find it
 	private Player player;
 
+	
+	private List<Platform> platforms = new ArrayList<>();
 	private Platform testPlatform;
+
+	
 	
 	private static final double DAMAGE_DROPS_PERC = 0.8;
 	private static final double HEALING_DROPS_PERC = 0.18;
@@ -42,14 +46,13 @@ public class GameComponent extends JComponent {
 	public GameComponent() {
 		
 		this.testPlatform = new Platform(30, 200, 200, 20);
-		
+		this.platforms.add(this.testPlatform);
 		this.player =  new Player(10, 0, this);
 	
-
-		this.platforms.add(new BouncingPlatform(200, 100, 5, 0, this));
-		this.platforms.add(new BouncingPlatform(30,  100, 0, 5, this));
-		this.platforms.add(new BouncingPlatform(130, 150, 0, 5, this));
-		this.platforms.add(new BouncingPlatform(230, 200, 0, 5, this));
+		this.enemies.add(new Enemy(200, 100, 5, 0, this));
+		this.enemies.add(new Enemy(30,  100, 0, 5, this));
+		this.enemies.add(new Enemy(130, 150, 0, 5, this));
+		this.enemies.add(new Enemy(230, 200, 0, 5, this));
 	}
 
 	public void drawScreen() {
@@ -65,11 +68,14 @@ public class GameComponent extends JComponent {
 		for (AbstractDrop drop : this.drops) {
 			drop.drawOn(g2);
 		}
-		for (AbstractPlatform platform : this.platforms) {
-			platform.drawOn(g2);
+		for (Entity enemy : this.enemies) {
+			enemy.drawOn(g2);
 		}
 		this.player.drawOn(g2);
-		this.testPlatform.drawOn(g2);
+		for (Platform platform : this.platforms) {
+			platform.drawOn(g2);
+		}
+
 	}
 
 	public void updateState() {
@@ -84,28 +90,45 @@ public class GameComponent extends JComponent {
 	private void handleCollisions() {
 		List<GameObject> allObjects = new ArrayList<>();
 		allObjects.addAll( this.drops);
-		allObjects.addAll( this.platforms);
+//		allObjects.addAll( this.platforms);
+//		allObjects.addAll( this.entities);
 		
 		//drop and platform collisions
-		for(AbstractDrop r: drops){
-			for(AbstractPlatform p: platforms){
-				if( !r.shouldRemove() && !p.shouldRemove()) {
-					if (r.overlaps(p)) {
-						r.collideWithPlatform(p);
-					}
+//		for(AbstractDrop r: drops){
+//			for(Entity p: platforms){
+//				if( !r.shouldRemove() && !p.shouldRemove()) {
+//					if (r.overlaps(p)) {
+//						r.collideWithPlatform(p);
+//					}
+//				}
+//			}
+//		}
+//		
+//		for( Entity p1: platforms){
+//			for( Entity p2: platforms){
+//				if (p1 != p2) {
+//					if (p1.overlaps(p2)) {
+//						p1.collideWithPlatform(p2);
+//					}
+//				}
+//			}
+//		}
+		for (entities.Platform p: platforms) {
+			for(Entity e: enemies) {
+				if (e.overlaps(p)) {
+					e.collideWithPlatform(p);
 				}
+				else e.gravity = 1;
 			}
+			if (player.overlaps(p)){
+				player.collideWithPlatform(p);
+			}
+			else player.gravity = 1;
 		}
 		
-		for( AbstractPlatform p1: platforms){
-			for( AbstractPlatform p2: platforms){
-				if (p1 != p2) {
-					if (p1.overlaps(p2)) {
-						p1.collideWithPlatform(p2);
-					}
-				}
-			}
-		}
+		
+		
+		
 		
 		
 		List<GameObject> shouldRemove = new ArrayList<>();
@@ -118,7 +141,7 @@ public class GameComponent extends JComponent {
 		
 		for(GameObject object: shouldRemove){
 			this.drops.remove(object);
-			this.platforms.remove(object);
+			this.enemies.remove(object);
 			object.onRemove();
 		}
 	}
@@ -138,7 +161,7 @@ public class GameComponent extends JComponent {
 	}
 
 	private void updatePlatforms() {
-		for (AbstractPlatform platform : this.platforms) {
+		for (Entity platform : this.enemies) {
 			platform.update();
 		}
 	}
