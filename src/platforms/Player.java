@@ -15,9 +15,9 @@ import game.GameObject;
  */
 public class Player extends GameObject {
 	
-	public int gravity = 0;
+	public int gravity = 1;
 	public static final int SIZE = 25;
-	private static final int STARTING_DX = 3;
+	private static final int STARTING_DX = 0;
 	private static final int STARTING_DY = 0;
 	
 	private static final int BOX_SIZE = 20;
@@ -40,14 +40,24 @@ public class Player extends GameObject {
 	//the user clicks a button to return back to the other side
 	@Override
 	public void update() {
-		this.yVelocity += 0.05*gravity;
+		this.yVelocity += 0.05;
 		super.update();
 		if ( isOffScreen()  ) {
 			this.reverseDirection();
 			super.update();
 			this.reverseDirection();
+		if(xVelocity > 0) {
+			this.xVelocity -= 0.1;
+		} else if(xVelocity < 0) {
+			this.xVelocity += 0.1;
 		}
-		
+		this.yVelocity += 0.05;
+//		if ( isOffScreen()  ) {
+//			this.reverseDirection();
+//			super.update();
+//			this.reverseDirection();
+//		}
+		}
 	}
 
 	public void setXSpeed(double c1) {

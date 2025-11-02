@@ -66,9 +66,7 @@ public class GameComponent extends JComponent {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
-		for (AbstractDrop drop : this.drops) {
-			drop.drawOn(g2);
-		}
+
 		for (Entity enemy : this.enemies) {
 			enemy.drawOn(g2);
 		}
@@ -178,9 +176,6 @@ public class GameComponent extends JComponent {
 		this.player.setXSpeed(c);
 	}
 
-	public void createRainDrop(Double boundingBox) {
-		this.drops.add(new DamagingDrop(boundingBox, this));
-	}
 	//e
 
 	public void setPlayerYSpeed(int i) {

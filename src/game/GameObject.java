@@ -86,7 +86,7 @@ public abstract class GameObject {
 		return y > gameComponent.getHeight();
 	}
 	
-	public abstract void collideWithPlatform(Platform platform );
+	public abstract void collideWithPlatform(Platform platform);
 
 
 }

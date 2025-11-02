@@ -12,7 +12,7 @@ import game.GameComponent;
  * into a shower of RainDrops. 
  *
  */
-public class BouncingPlatform extends AbstractPlatform {
+public class BouncingPlatform extends Entity {
 	private static final int WIDTH = 80;
 	private static final int HEIGHT = 20;
 	private static final int RED_START = 222, GREEN_START=184, BLUE_START=135, WATER_INCREMENT=5;
@@ -29,7 +29,7 @@ public class BouncingPlatform extends AbstractPlatform {
 		return this.rainDropsCollected >= 255 - BLUE_START;
 	}
 
-	public void collideWithPlatform(AbstractPlatform otherPlatform ) {
+	public void collideWithPlatform(Entity otherPlatform ) {
 		this.reverseDirection();
 		this.update();
 		bounced =true;

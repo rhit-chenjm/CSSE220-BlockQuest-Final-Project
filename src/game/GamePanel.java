@@ -19,29 +19,17 @@ public class GamePanel extends JPanel {
 			
             @Override
             public void keyPressed(KeyEvent e) {
-//<<<<<<< HEAD
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT: 
-                        canvas.setPlayerXSpeed(-1);
-                        canvas.setPlayerYSpeed(0);
+                        canvas.setPlayerXSpeed(-2);
                         break;
                     case KeyEvent.VK_RIGHT: 
-                    	canvas.setPlayerXSpeed(1);
-                    	canvas.setPlayerYSpeed(0);
+                    	canvas.setPlayerXSpeed(2);
                     	break;
                     case KeyEvent.VK_UP: 
-                    	canvas.setPlayerXSpeed(0);
                     	canvas.setPlayerYSpeed(-5);
                     	break;
-                    case KeyEvent.VK_DOWN:
-                    	canvas.setPlayerXSpeed(0);
-                    	canvas.setPlayerYSpeed(1);
-                    	break;
-                    
-                    case KeyEvent.KEY_RELEASED:
-                    	canvas.setPlayerXSpeed(0);
-                    	canvas.setPlayerYSpeed(0);
-                    	break;
+
    
                     default:
                     	canvas.setPlayerXSpeed(0);
@@ -68,6 +56,23 @@ public class GamePanel extends JPanel {
 //            		
 //            	}
 //            	e.setKeyCode(0);
+            	
+            	
+            	
+            	
+            	System.out.println(e.getKeyCode());
+            	if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    canvas.setPlayerXSpeed(-2);
+            	} else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+                	canvas.setPlayerXSpeed(2);
+//            	} else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+//                	canvas.setPlayerYSpeed(2);
+            	}else if(e.getKeyCode() == KeyEvent.VK_UP){
+                	canvas.setPlayerYSpeed(-2);
+            	} 
+            	e.setKeyCode(0);
+                 // In GamePanel.keyPressed (add a new case)
+
                 
 // In GamePanel.keyPressed (add a new case)
 

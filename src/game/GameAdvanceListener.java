@@ -21,7 +21,6 @@ public class GameAdvanceListener implements ActionListener {
 		// to change the state of the game.
 
 		// update screen
-		this.gameComponent.addPlayerYSpeed(0.5);
 //		System.out.println()
 		this.gameComponent.updateState();
 		this.gameComponent.drawScreen();
