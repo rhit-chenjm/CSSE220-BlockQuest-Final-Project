@@ -1,6 +1,7 @@
 package platforms;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 import game.GameComponent;
@@ -17,6 +18,8 @@ public class Enemy extends Entity {
 	private static final int HEIGHT = 20;
 	private int health = 1;
 	private boolean bounced;
+	private Rectangle boundingBox;
+
 	
 	public Enemy(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent) {
 		super(x, y, xVelocity, yVelocity, gameComponent, WIDTH, HEIGHT);
@@ -26,11 +29,11 @@ public class Enemy extends Entity {
 		return this.health <= 0;
 	}
 
-//	public void collideWithPlatform(Entity otherPlatform ) {
-//		this.reverseDirection();
-//		this.update();
-//		bounced =true;
-//	}
+	public void collideWithPlatform(Entity otherPlatform ) {
+		this.reverseDirection();
+		this.update();
+		bounced =true;
+	}
 
 	@Override
 	public void update() {
@@ -53,10 +56,16 @@ public class Enemy extends Entity {
 
 		bounced =false;
 	}
-
+//	public boolean checkForCollision(Player player) {
+//		return true;
+//	}
 	public void drawOn(Graphics2D g) {
 		g.setColor(new Color(255, 70, 0));			
 		g.fill(new Rectangle2D.Double(getBoundingBox().x, getBoundingBox().y, this.getWidth(), this.getHeight()));
+	}
+	
+	public void subtractLife(Player player) {
+		player.subtractLife();
 	}
 
 	
