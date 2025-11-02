@@ -126,7 +126,7 @@ public class Player extends GameObject {
 		}
 		if(isTouchingPlatform = true) {
 			this.gravity = 0;
-			this.yVelocity = 0;
+			if (this.yVelocity > 0) this.yVelocity = 0;
 		} else {
 			this.y -= 1;
 			this.yVelocity = 5;
