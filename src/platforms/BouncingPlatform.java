@@ -38,9 +38,6 @@ public class BouncingPlatform extends Entity {
 	@Override
 	public void update() {
 		super.update();
-		if ( isOffScreen()  ) {
-			this.reverseDirection();
-		}
 		invincibleCount--;
 		bounced =false;
 	}

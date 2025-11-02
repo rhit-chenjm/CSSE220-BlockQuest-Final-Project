@@ -74,12 +74,22 @@ public abstract class GameObject {
 		return getBoundingBox().intersects(p.getBoundingBox());
 	}
 	
-	public boolean isOffScreen() {
+	public int isOffScreen() {
 		boolean xLow = x <0;
 		boolean xHigh = x + width > gameComponent.getWidth();
 		boolean yLow = y <0;
 		boolean yHigh = y + height > gameComponent.getHeight();
-		return xLow || xHigh|| yLow|| yHigh;
+		if(xLow) {
+			return 1;
+		} else if(xHigh) {
+			return 2;
+		} else if(yLow) {
+			return 3;
+		} else if(yHigh) {
+			return 4;
+		} else {
+			return 0;
+		}
 	}
 	
 	public boolean offBottom() {

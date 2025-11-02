@@ -88,7 +88,6 @@ public class GameComponent extends JComponent {
 
 	private void handleCollisions() {
 		List<GameObject> allObjects = new ArrayList<>();
-		allObjects.addAll( this.drops);
 //		allObjects.addAll( this.platforms);
 //		allObjects.addAll( this.entities);
 		
@@ -175,11 +174,18 @@ public class GameComponent extends JComponent {
 	public void setPlayerXSpeed(double c) {
 		this.player.setXSpeed(c);
 	}
+	
+	public void setIsCollidingWithPlatform(boolean b1) {
+		this.player.setTouchingPlatform(b1);
+		System.out.println(b1);
+		}
+	
 
 	//e
 
 	public void setPlayerYSpeed(int i) {
 		// TODO Auto-generated method stub
+		this.player.addYPos(-4);
 		this.player.setYSpeed(i);
 	}
 	public void addPlayerYSpeed(double i) {

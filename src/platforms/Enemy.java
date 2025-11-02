@@ -34,11 +34,25 @@ public class Enemy extends Entity {
 
 	@Override
 	public void update() {
-		this.yVelocity += 0.05*gravity;
-		super.update();
-		if ( isOffScreen()  ) {
-			this.reverseDirection();
+		if ( isOffScreen() == 1 ) {
+			this.xVelocity = 0;
+			this.x = 0;
+		} else if(isOffScreen() == 2) {
+			this.x = super.gameComponent.getWidth()-super.width;
+			this.xVelocity = 0;
+		} else if(isOffScreen() == 3) {
+			this.yVelocity = 0;
+			this.y = 0;
+			this.gravity = 0;
+		} else if(isOffScreen() == 4) {
+			this.y = super.gameComponent.getHeight()-super.height;
+			this.yVelocity = 0;
+			this.gravity = 0;
 		}
+		this.yVelocity += 0.05*gravity;
+
+		super.update();
+
 		bounced =false;
 	}
 

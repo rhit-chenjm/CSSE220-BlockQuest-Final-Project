@@ -27,10 +27,9 @@ public class GamePanel extends JPanel {
                     	canvas.setPlayerXSpeed(2);
                     	break;
                     case KeyEvent.VK_UP: 
-                    	canvas.setPlayerYSpeed(-5);
+                    	
+                    	canvas.setPlayerYSpeed(-2);
                     	break;
-
-   
                     default:
                     	canvas.setPlayerXSpeed(0);
                     	canvas.setPlayerYSpeed(0);
@@ -60,17 +59,17 @@ public class GamePanel extends JPanel {
             	
             	
             	
-            	System.out.println(e.getKeyCode());
-            	if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    canvas.setPlayerXSpeed(-2);
-            	} else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-                	canvas.setPlayerXSpeed(2);
-//            	} else if(e.getKeyCode() == KeyEvent.VK_DOWN){
-//                	canvas.setPlayerYSpeed(2);
-            	}else if(e.getKeyCode() == KeyEvent.VK_UP){
-                	canvas.setPlayerYSpeed(-2);
-            	} 
-            	e.setKeyCode(0);
+//            	System.out.println(e.getKeyCode());
+//            	if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+//                    canvas.setPlayerXSpeed(-2);
+//            	} else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+//                	canvas.setPlayerXSpeed(2);
+////            	} else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+////                	canvas.setPlayerYSpeed(2);
+//            	}else if(e.getKeyCode() == KeyEvent.VK_UP){
+//                	canvas.setPlayerYSpeed(-2);
+//            	} 
+//            	e.setKeyCode(0);
                  // In GamePanel.keyPressed (add a new case)
 
                 

@@ -2,6 +2,7 @@ package platforms;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import entities.Platform;
 import game.GameComponent;
@@ -23,15 +24,23 @@ public class Player extends GameObject {
 	private static final int BOX_SIZE = 20;
 	private static final int BOX_X = 10;
 	private static final int BOX_Y = 200;
+	private boolean isTouchingPlatform;
+	private Rectangle r1;
 	
 	//TODO: could add a color that changes each time the box gets hit by drops
 	
 	public Player(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent) {
 		super(gameComponent,x, y, xVelocity, yVelocity, SIZE , SIZE);
+		isTouchingPlatform = false;
+		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
 	}
 
 	public Player(int width, int height, GameComponent gameComponent) {
 		super(gameComponent, BOX_X, BOX_Y, STARTING_DX, STARTING_DY, SIZE, SIZE);
+		isTouchingPlatform = false;
+		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
+
+
 	}
 
 
@@ -40,24 +49,34 @@ public class Player extends GameObject {
 	//the user clicks a button to return back to the other side
 	@Override
 	public void update() {
-		this.yVelocity += 0.05;
+		if ( isOffScreen() == 1 ) {
+			this.xVelocity = 0;
+			this.x = 0;
+		} else if(isOffScreen() == 2) {
+			this.xVelocity = 0;
+			this.x = super.gameComponent.getWidth()-super.width;
+		} else if(isOffScreen() == 3) {
+			this.yVelocity = 0;
+			this.y = 0;
+		} else if(isOffScreen() == 4) {
+			this.yVelocity = 0;
+			this.y = super.gameComponent.getHeight()-super.height;
+
+		}
+		if(isTouchingPlatform) {
+			if(xVelocity > 0) {
+				xVelocity -= 0.01;
+			} else {
+				xVelocity += 0.01;
+			}
+		}
+
+		this.yVelocity += 0.05 * gravity;
+
+		
 		super.update();
-		if ( isOffScreen()  ) {
-			this.reverseDirection();
-			super.update();
-			this.reverseDirection();
-		if(xVelocity > 0) {
-			this.xVelocity -= 0.1;
-		} else if(xVelocity < 0) {
-			this.xVelocity += 0.1;
-		}
-		this.yVelocity += 0.05;
-//		if ( isOffScreen()  ) {
-//			this.reverseDirection();
-//			super.update();
-//			this.reverseDirection();
-//		}
-		}
+
+		
 	}
 
 	public void setXSpeed(double c1) {
@@ -72,13 +91,36 @@ public class Player extends GameObject {
 	public double getYSpeed() {
 		return super.yVelocity;
 	}
+	public void addYPos(double c1) {
+		super.y += c1;
+	}
 	
 	
 	
 	@Override
 	public void collideWithPlatform( Platform other) {
-		if (this.yVelocity > 0) this.yVelocity = 0;
-		this.gravity = 0;
+		if(other.collidesWith(r1)) {
+			isTouchingPlatform = true;
+		}else {
+			isTouchingPlatform = false;
+		}
+		if(isTouchingPlatform = true) {
+			this.gravity = 0;
+			this.yVelocity = 0;
+		} else {
+			this.y -= 1;
+			this.yVelocity = 5;
+			this.gravity = 1;
+		}
+
+		
+
+	}
+	public boolean isTouchingPlatform() {
+		return isTouchingPlatform;
+	}
+	public void setTouchingPlatform(boolean b1) {
+		isTouchingPlatform = b1;
 	}
 	
 	
