@@ -11,10 +11,10 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
-import drops.AbstractDrop;
-import drops.DamagingDrop;
-import drops.HealingDrop;
-import drops.InvincibilityDrop;
+//import drops.AbstractDrop;
+//import drops.DamagingDrop;
+//import drops.HealingDrop;
+//import drops.InvincibilityDrop;
 import entities.Platform;
 import platforms.Entity;
 import platforms.Enemy;
@@ -25,28 +25,20 @@ public class GameComponent extends JComponent {
 	// in another class like Level.
 	private int numTicks;
 
-	// There are two types of objects with 6 subtypes
-	private List<AbstractDrop> drops = new ArrayList<>();
+	
+//	private List<AbstractDrop> drops = new ArrayList<>();
 	private List<Entity> enemies = new ArrayList<>();
-	
-	//this gets stored in the list above but easier to access directly since there is one of them
-	//than to have to look through an find it
 	private Player player;
-
-	
 	private List<Platform> platforms = new ArrayList<>();
 	private Platform testPlatform;
-
-	
-	
-	private static final double DAMAGE_DROPS_PERC = 0.8;
-	private static final double HEALING_DROPS_PERC = 0.18;
-
+	private Platform lowTestPlatform;
 
 	public GameComponent() {
 		
 		this.testPlatform = new Platform(30, 200, 200, 20);
+		this.lowTestPlatform = new Platform(250, 400, 300, 20);
 		this.platforms.add(this.testPlatform);
+		this.platforms.add(this.lowTestPlatform);
 		this.player =  new Player(10, 0, this);
 	
 		this.enemies.add(new Enemy(200, 100, 5, 0, this));
@@ -79,7 +71,7 @@ public class GameComponent extends JComponent {
 
 	public void updateState() {
 		// Each is big enough to be in a helper method.
-		updateRaindrops();
+//		updateRaindrops();
 		updatePlatforms();
 		handleCollisions();
 		updatePlayer();
@@ -88,46 +80,22 @@ public class GameComponent extends JComponent {
 
 	private void handleCollisions() {
 		List<GameObject> allObjects = new ArrayList<>();
-//		allObjects.addAll( this.platforms);
-//		allObjects.addAll( this.entities);
 		
-		//drop and platform collisions
-//		for(AbstractDrop r: drops){
-//			for(Entity p: platforms){
-//				if( !r.shouldRemove() && !p.shouldRemove()) {
-//					if (r.overlaps(p)) {
-//						r.collideWithPlatform(p);
-//					}
-//				}
-//			}
-//		}
-//		
-//		for( Entity p1: platforms){
-//			for( Entity p2: platforms){
-//				if (p1 != p2) {
-//					if (p1.overlaps(p2)) {
-//						p1.collideWithPlatform(p2);
-//					}
-//				}
-//			}
-//		}
+		// platform collision with enemies and player
 		for (entities.Platform p: platforms) {
 			for(Entity e: enemies) {
 				if (e.overlaps(p)) {
 					e.collideWithPlatform(p);
+					e.gravity = 0;
 				}
 				else e.gravity = 1;
 			}
 			if (player.overlaps(p)){
 				player.collideWithPlatform(p);
+				player.gravity = 0;
 			}
 			else player.gravity = 1;
 		}
-		
-		
-		
-		
-		
 		
 		List<GameObject> shouldRemove = new ArrayList<>();
 		
@@ -138,29 +106,15 @@ public class GameComponent extends JComponent {
 		}
 		
 		for(GameObject object: shouldRemove){
-			this.drops.remove(object);
+//			this.drops.remove(object);
 			this.enemies.remove(object);
 			object.onRemove();
 		}
 	}
 
-	private void updateRaindrops() {
-//		double rand = Math.random();
-//		if (rand < DAMAGE_DROPS_PERC) {
-//			this.drops.add(new DamagingDrop(this.getWidth(), this));
-//		} else if (rand < DAMAGE_DROPS_PERC + HEALING_DROPS_PERC) {
-//			this.drops.add(new HealingDrop(this.getWidth(), this));
-//		} else {
-//			this.drops.add(new InvincibilityDrop(this.getWidth(), this));
-//		}
-//		for (AbstractDrop drop : this.drops) {
-//			drop.update();
-//		}
-	}
-
 	private void updatePlatforms() {
-		for (Entity platform : this.enemies) {
-			platform.update();
+		for (Entity enemy : this.enemies) {
+			enemy.update();
 		}
 	}
 	private void updatePlayer() {
