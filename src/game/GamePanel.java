@@ -19,11 +19,7 @@ public class GamePanel extends JPanel {
 			
             @Override
             public void keyPressed(KeyEvent e) {
-            	
-            	
-            	
-            	System.out.println(e.getKeyCode());
-            	
+//<<<<<<< HEAD
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT: 
                         canvas.setPlayerXSpeed(-1);
@@ -35,7 +31,7 @@ public class GamePanel extends JPanel {
                     	break;
                     case KeyEvent.VK_UP: 
                     	canvas.setPlayerXSpeed(0);
-                    	canvas.setPlayerYSpeed(-1);
+                    	canvas.setPlayerYSpeed(-5);
                     	break;
                     case KeyEvent.VK_DOWN:
                     	canvas.setPlayerXSpeed(0);
@@ -51,15 +47,35 @@ public class GamePanel extends JPanel {
                     	canvas.setPlayerXSpeed(0);
                     	canvas.setPlayerYSpeed(0);
                     	break;
-                 // In GamePanel.keyPressed (add a new case)
+                }}});
+//=======
+//            	System.out.println(e.getKeyCode());
+//            	if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+//                    canvas.setPlayerXSpeed(-10);
+//                    canvas.setPlayerYSpeed(0);
+//            	} else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+//                	canvas.setPlayerXSpeed(10);
+//                	canvas.setPlayerYSpeed(0);
+//            	} else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+//                	canvas.setPlayerXSpeed(0);
+//                	canvas.setPlayerYSpeed(10);
+//            	}else if(e.getKeyCode() == KeyEvent.VK_UP){
+//                	canvas.setPlayerXSpeed(0);
+//                	canvas.setPlayerYSpeed(-10);
+//            	} else {
+//            		canvas.setPlayerXSpeed(0);
+//            		canvas.setAlignmentY(0);
+//            		
+//            	}
+//            	e.setKeyCode(0);
+                
+// In GamePanel.keyPressed (add a new case)
 
-                }
-            }
-        });
+               
 		setFocusable(true);          // must be focusable to get keys
 		requestFocusInWindow();      // ask for focus
 
-    }
+            }
     public GameComponent getGameComponent() {
     	return canvas;
     }

@@ -49,6 +49,7 @@ public abstract class GameObject {
 	public void update() {
 		this.x += this.xVelocity;
 		this.y += this.yVelocity;
+
 	}
 
 	public void reverseDirection() {

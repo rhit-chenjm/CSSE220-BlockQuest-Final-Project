@@ -13,7 +13,7 @@ import entities.Platform;
 public abstract class Entity extends GameObject {
 	
 	
-	public int gravity;
+	public int gravity = 0;
 
 	public Entity(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent, int width, int height) {
 		super(gameComponent,x,y,xVelocity,yVelocity, width,height);

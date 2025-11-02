@@ -56,6 +56,12 @@ public class Player extends GameObject {
 	public void setYSpeed(double c1) {
 		super.yVelocity = c1;
 	}
+	public void addYSpeed(double c1) {
+		super.yVelocity += c1;
+	}
+	public double getYSpeed() {
+		return super.yVelocity;
+	}
 	
 	
 	
