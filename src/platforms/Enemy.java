@@ -34,6 +34,7 @@ public class Enemy extends Entity {
 
 	@Override
 	public void update() {
+		this.yVelocity += 0.05*gravity;
 		super.update();
 		if ( isOffScreen()  ) {
 			this.reverseDirection();

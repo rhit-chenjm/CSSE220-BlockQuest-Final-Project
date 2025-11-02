@@ -1,5 +1,6 @@
 package platforms;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import entities.Platform;
@@ -39,6 +40,7 @@ public class Player extends GameObject {
 	//the user clicks a button to return back to the other side
 	@Override
 	public void update() {
+		this.yVelocity += 0.05*gravity;
 		super.update();
 		if ( isOffScreen()  ) {
 			this.reverseDirection();
@@ -66,6 +68,7 @@ public class Player extends GameObject {
 	
 	@Override
 	public void drawOn(Graphics2D g) {
+		g.setColor(new Color(0, 255, 0));
 		g.fill( this.getBoundingBox() );
 	}
 

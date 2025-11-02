@@ -29,7 +29,7 @@ public abstract class Entity extends GameObject {
 	
 	public void collideWithPlatform( Platform other) {
 		if (this.yVelocity > 0) this.yVelocity = 0;
-		this.gravity = 1;
+		this.gravity = 0;
 	}
 	
 
