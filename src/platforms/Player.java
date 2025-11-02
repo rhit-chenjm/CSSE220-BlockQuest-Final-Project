@@ -76,7 +76,13 @@ public class Player extends GameObject {
 		}
 
 		this.yVelocity += 0.05 * gravity;
-			super.update();
+		super.update();
+
+		if(xVelocity > 0) {
+			this.xVelocity -= 0.01;
+		} else if(xVelocity < 0) {
+			this.xVelocity += 0.01;
+		}
 
 		
 	}
