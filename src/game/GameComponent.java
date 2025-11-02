@@ -82,20 +82,33 @@ public class GameComponent extends JComponent {
 		List<GameObject> allObjects = new ArrayList<>();
 		
 		// platform collision with enemies and player
-		for (entities.Platform p: platforms) {
-			for(Entity e: enemies) {
-				if (e.overlaps(p)) {
-					e.collideWithPlatform(p);
-					e.gravity = 0;
+		for(Entity e: enemies) {
+			boolean eGravChanged = false;
+			for (entities.Platform p: platforms) {
+				if (!eGravChanged) {
+					if (e.overlaps(p)) {
+						e.collideWithPlatform(p);
+						e.gravity = 0;
+						eGravChanged = true;
+					}
+					else e.gravity = 1;
 				}
-				else e.gravity = 1;
 			}
-			if (player.overlaps(p)){
-				player.collideWithPlatform(p);
-				player.gravity = 0;
-			}
-			else player.gravity = 1;
 		}
+		
+		boolean pGravChanged = false;
+		for (entities.Platform p: platforms) {
+			if (!pGravChanged) {
+				if (player.overlaps(p)){
+					player.collideWithPlatform(p);
+					player.gravity = 0;
+					pGravChanged = true;
+				}
+				else player.gravity = 1;
+			}
+		}
+		
+		
 		
 		List<GameObject> shouldRemove = new ArrayList<>();
 		
