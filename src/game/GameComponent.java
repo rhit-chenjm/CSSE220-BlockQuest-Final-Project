@@ -38,7 +38,7 @@ public class GameComponent extends JComponent {
 	public GameComponent() {
 		
 		this.testPlatform = new Platform(30, 200, 200, 20);
-		this.lowTestPlatform = new Platform(300, 400, 300, 20);
+		this.lowTestPlatform = new Platform(250, 400, 300, 20);
 		this.platforms.add(this.testPlatform);
 		this.platforms.add(this.lowTestPlatform);
 		this.testLowCollectable = new Collectable(300, 100, 0, 0, this);
