@@ -50,6 +50,7 @@ public class GameComponent extends JComponent {
 	public GameComponent() {
 		
 		this.testPlatform = new Platform(30, 200, 200, 20);
+		this.lowTestPlatform = new Platform(300, 400, 300, 20);
 		this.platforms.add(this.testPlatform);
 		this.platforms.add(this.lowTestPlatform);
 		
@@ -103,40 +104,32 @@ public class GameComponent extends JComponent {
 
 	private void handleCollisions() {
 		List<GameObject> allObjects = new ArrayList<>();
-//		allObjects.addAll( this.platforms);
-//		allObjects.addAll( this.entities);
 		
-		//drop and platform collisions
-//		for(AbstractDrop r: drops){
-//			for(Entity p: platforms){
-//				if( !r.shouldRemove() && !p.shouldRemove()) {
-//					if (r.overlaps(p)) {
-//						r.collideWithPlatform(p);
-//					}
-//				}
-//			}
-//		}
-//		
-//		for( Entity p1: platforms){
-//			for( Entity p2: platforms){
-//				if (p1 != p2) {
-//					if (p1.overlaps(p2)) {
-//						p1.collideWithPlatform(p2);
-//					}
-//				}
-//			}
-//		}
-		for (entities.Platform p: platforms) {
-			for(Entity e: enemies) {
-				if (e.overlaps(p)) {
-					e.collideWithPlatform(p);
+		
+		for (Entity e: enemies) {
+			boolean eChangedGravity = false;
+			for (Platform p: platforms) {
+				if (!eChangedGravity) {
+					if (e.overlaps(p)) {
+						e.collideWithPlatform(p);
+						e.gravity = 0;
+						eChangedGravity = true;
+					}
+					else e.gravity = 1;
 				}
-				else e.gravity = 1;
 			}
-			if (player.overlaps(p)){
-				player.collideWithPlatform(p);
+		}
+		
+		boolean pChangedGravity = false;
+		for (entities.Platform p: platforms) {
+			if (!pChangedGravity) {
+				if (player.overlaps(p)){
+					player.collideWithPlatform(p);
+					player.gravity = 0;
+					pChangedGravity = true;
+				}
+				else player.gravity = 1;
 			}
-			else player.gravity = 1;
 		}
 //		this.player.checkForEnemyCollision(enemies);
 

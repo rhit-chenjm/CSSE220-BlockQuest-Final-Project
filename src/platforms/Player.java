@@ -57,8 +57,6 @@ public class Player extends GameObject {
 			this.xVelocity = -this.xVelocity;
 			this.x = 0;
 		} else if(isOffScreen() == 2) {
-			this.xVelocity = 0;
-			this.x = super.gameComponent.getWidth()-super.width -4;
 			this.xVelocity = -this.xVelocity;
 			this.x = super.gameComponent.getWidth()-super.width;
 		} else if(isOffScreen() == 3) {
