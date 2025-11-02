@@ -1,4 +1,4 @@
-package platforms;
+package blocks;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -10,11 +10,9 @@ import entities.Platform;
 import game.GameComponent;
 import game.GameObject;
 /**
- * A Platform that moves around the screen and absorbs Drops.
+ * A Player moves by user input and collides with platforms
  * 
- * This platform never dies and when it reaches the edge of the screen
- * it stops there. If the user pressed a button the platform switches its current direction
- *
+ * A Player will interact with an Enemy or a Collectable and produce some effect
  */
 public class Player extends GameObject {
 	
@@ -29,8 +27,6 @@ public class Player extends GameObject {
 	private boolean isTouchingPlatform;
 	private Rectangle r1;
 	private int lives = 0;
-	
-	//TODO: could add a color that changes each time the box gets hit by drops
 	
 	public Player(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent) {
 		super(gameComponent,x, y, xVelocity, yVelocity, SIZE , SIZE);
@@ -48,9 +44,7 @@ public class Player extends GameObject {
 	}
 
 
-	//to make sure that the box stays on screen, we reverse direction and move back one tick
-	//but then we reverse again so that the same thing will happen next state until
-	//the user clicks a button to return back to the other side
+	// handles movement, offscreen interactions, platform interactions, etc.
 	@Override
 	public void update() {
 		if ( isOffScreen() == 1 ) {
@@ -86,7 +80,8 @@ public class Player extends GameObject {
 
 		
 	}
-
+	
+	// methods for changing fields of Player
 	public void setXSpeed(double c1) {
 		super.xVelocity = c1;
 	}

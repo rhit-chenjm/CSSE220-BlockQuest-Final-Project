@@ -1,14 +1,14 @@
 package game;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+/**
+ * player controls, some formatting
+ */
 public class GamePanel extends JPanel {
     private final GameComponent canvas = new GameComponent();
     public GamePanel() {
@@ -19,6 +19,7 @@ public class GamePanel extends JPanel {
 			
             @Override
             public void keyPressed(KeyEvent e) {
+            	// player controls by switch case
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT: 
                         canvas.setPlayerXSpeed(-2);
@@ -27,7 +28,6 @@ public class GamePanel extends JPanel {
                     	canvas.setPlayerXSpeed(2);
                     	break;
                     case KeyEvent.VK_UP: 
-                  
                     	canvas.setPlayerYSpeed(-2);
                     	break;
                     default:
@@ -54,17 +54,7 @@ public class GamePanel extends JPanel {
 //            		canvas.setAlignmentY(0);
 //            		
 //            	}
-//            	e.setKeyCode(0);
-            	
-            	
-            	
-
-                 // In GamePanel.keyPressed (add a new case)
-
-                
-// In GamePanel.keyPressed (add a new case)
-
-               
+//            	e.setKeyCode(0);               
 		setFocusable(true);          // must be focusable to get keys
 		requestFocusInWindow();      // ask for focus
 

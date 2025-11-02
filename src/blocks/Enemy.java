@@ -1,4 +1,4 @@
-package platforms;
+package blocks;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -7,13 +7,11 @@ import java.awt.geom.Rectangle2D;
 import game.GameComponent;
 
 /**
- * A Platform move around the screen and collects RainDrops.
- * 
- * A Platform can fill with Raindrops; when it does, it EXPLODES 
- * into a shower of RainDrops. 
+ * An Enemy moves around on screen, colliding with platforms
  *
+ * An Enemy will produce some effect when interacting with a Player
  */
-public class Enemy extends Entity {
+public class Enemy extends AbstractBlock {
 	private static final int WIDTH = 20;
 	private static final int HEIGHT = 20;
 	private int health = 1;
@@ -25,16 +23,17 @@ public class Enemy extends Entity {
 		super(x, y, xVelocity, yVelocity, gameComponent, WIDTH, HEIGHT);
 	}
 
-	public boolean willExplode() {
+	public boolean willRemove() {
 		return this.health <= 0;
 	}
 
-	public void collideWithPlatform(Entity otherPlatform ) {
+	public void collideWithBlock(AbstractBlock otherBlock ) {
 		this.reverseDirection();
 		this.update();
 		bounced =true;
 	}
-
+	
+	// handles movement, offscreen interactions, platform interactions, etc.
 	@Override
 	public void update() {
 		if ( isOffScreen() == 1 ) {
@@ -56,9 +55,12 @@ public class Enemy extends Entity {
 
 		bounced =false;
 	}
+	
 //	public boolean checkForCollision(Player player) {
 //		return true;
 //	}
+	
+	
 	public void drawOn(Graphics2D g) {
 		g.setColor(new Color(255, 70, 0));			
 		g.fill(new Rectangle2D.Double(getBoundingBox().x, getBoundingBox().y, this.getWidth(), this.getHeight()));
@@ -68,35 +70,13 @@ public class Enemy extends Entity {
 		player.subtractLife();
 	}
 
-	
-
 	@Override
 	public void onRemove() {
-		// leave empty
+		// not yet implemented
 	}
 	
 	@Override
 	public boolean shouldRemove() {
-		return willExplode();
+		return willRemove();
 	}
-	
-	
-	//Methods shared with UserControlledPlatform but not with GameObject
-	@Override
-	public void removeDrop() {
-		// leave empty
-	}
-	
-	@Override
-	public void addDrop() {
-		// leave empty
-	}
-	
-	@Override
-	public void makeInvinciple() {
-		// leave empty
-	}
-	
-	
-
 }

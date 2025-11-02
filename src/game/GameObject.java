@@ -5,11 +5,12 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
+//import blocks.Enemy;
+//import blocks.Entity;
 import entities.Platform;
-import platforms.Enemy;
-import platforms.Entity;
-
-// TODO: Refactor Raindrop, Platform, (and hopefully that lone box?) into GameObjects.
+/**
+ * moves objects within the game
+ */
 public abstract class GameObject {
 	
 	protected double x, y;
@@ -51,11 +52,10 @@ public abstract class GameObject {
 		return this.height;
 	}
 
-	// updatePosition, fall, ... can all be consolidated into an update method.
+	// updating position of objects
 	public void update() {
 		this.x += this.xVelocity;
 		this.y += this.yVelocity;
-
 	}
 
 	public void reverseDirection() {
@@ -63,7 +63,6 @@ public abstract class GameObject {
 		this.yVelocity = -this.yVelocity;
 	}
 	
-	// fall, willExplode, ...
 	public boolean shouldRemove() {
 		return this.shouldRemove;
 	}
@@ -75,7 +74,8 @@ public abstract class GameObject {
 	public Rectangle2D.Double getBoundingBox() {
 		return new Rectangle2D.Double(this.x, this.y, getWidth(), getHeight() );
 	}
-
+	
+	// handles some overlap/collision
 	public boolean overlaps(Platform p) {
 		return getBoundingBox().intersects(p.getBoundingBox());
 	}
