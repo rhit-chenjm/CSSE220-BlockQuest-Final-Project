@@ -11,6 +11,16 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+import entities.Background;
+//import drops.AbstractDrop;
+//import drops.DamagingDrop;
+//import drops.HealingDrop;
+//import drops.InvincibilityDrop;
+import entities.Platform;
+//import blocks.Entity;
+import blocks.Enemy;
+import blocks.Player;
+
 import blocks.Collectable;
 import blocks.Enemy;
 import blocks.AbstractBlock;
@@ -35,8 +45,11 @@ public class GameComponent extends JComponent {
 	private Collectable testLowCollectable;
 	
 	// holds things to be placed on the screen
+	private Background background1;
+
 	public GameComponent() {
 		
+		this.background1 = new Background(1);
 		this.testPlatform = new Platform(30, 200, 200, 20);
 		this.lowTestPlatform = new Platform(250, 400, 300, 20);
 		this.platforms.add(this.testPlatform);
@@ -62,13 +75,17 @@ public class GameComponent extends JComponent {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
+		this.background1.drawOn(g2);
+		
 		for (AbstractBlock enemy : this.enemies) {
 			enemy.drawOn(g2);
 		}
+		
 		this.player.drawOn(g2);
 		for (Platform platform : this.platforms) {
 			platform.drawOn(g2);
 		}
+		
 		for (Collectable collectable : this.collectables) {
 			collectable.drawOn(g2);
 		}

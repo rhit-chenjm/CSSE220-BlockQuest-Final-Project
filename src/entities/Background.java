@@ -39,7 +39,7 @@ public class Background implements Drawable {
 		}
 
 		if (imageLoaded) {
-			
+						
 			// 500 x 500 panel
     		g2.drawImage(image, 0, 0, 500, 500, null);
     	} else {

@@ -3,24 +3,40 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
+
+import entities.Drawable;
 import game.GameComponent;
+import java.io.IOException;
 
 /**
  * An Enemy moves around on screen, colliding with platforms
  *
  * An Enemy will produce some effect when interacting with a Player
  */
-public class Enemy extends AbstractBlock {
-	private static final int WIDTH = 20;
-	private static final int HEIGHT = 20;
+public class Enemy extends AbstractBlock implements Drawable {
+	private static final int WIDTH = 50;
+	private static final int HEIGHT = 50;
 	private int health = 1;
 	private boolean bounced;
-	private Rectangle boundingBox;
 
+	private Rectangle boundingBox;
+    private BufferedImage image;
+    private boolean imageLoaded = false;
 	
 	public Enemy(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent) {
 		super(x, y, xVelocity, yVelocity, gameComponent, WIDTH, HEIGHT);
+		
+		this.boundingBox = new Rectangle(x, y, WIDTH, HEIGHT);
+		
+		try {
+            image = ImageIO.read(Enemy.class.getResource("goose.png"));
+            this.imageLoaded = (image != null);
+        } catch (IOException | IllegalArgumentException ex) {
+            this.imageLoaded = false; 
+        }
 	}
 
 	public boolean willRemove() {
@@ -53,7 +69,7 @@ public class Enemy extends AbstractBlock {
 
 		super.update();
 
-		bounced =false;
+		bounced = false;
 	}
 	
 //	public boolean checkForCollision(Player player) {
@@ -61,9 +77,14 @@ public class Enemy extends AbstractBlock {
 //	}
 	
 	
-	public void drawOn(Graphics2D g) {
-		g.setColor(new Color(255, 70, 0));			
-		g.fill(new Rectangle2D.Double(getBoundingBox().x, getBoundingBox().y, this.getWidth(), this.getHeight()));
+	@Override
+	public void drawOn(Graphics2D g2) {
+		
+		if (this.imageLoaded) {
+			g2.drawImage(this.image, ((int) getBoundingBox().x), ((int) getBoundingBox().y), WIDTH, HEIGHT, null);
+    	} else {
+    		g2.setColor(new Color(255, 70, 0));			
+    		g2.fill(new Rectangle2D.Double(getBoundingBox().x, getBoundingBox().y, this.getWidth(), this.getHeight()));    	}
 	}
 	
 	public void subtractLife(Player player) {

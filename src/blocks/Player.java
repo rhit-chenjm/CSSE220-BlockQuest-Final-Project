@@ -5,6 +5,11 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import entities.Platform;
 import game.GameComponent;
@@ -17,22 +22,33 @@ import game.GameObject;
 public class Player extends GameObject {
 	
 	public int gravity = 1;
-	public static final int SIZE = 25;
+	public static final int SIZE = 80;
 	private static final int STARTING_DX = 0;
 	private static final int STARTING_DY = 0;
 	
-	private static final int BOX_SIZE = 20;
+	private static final int BOX_SIZE = 90;
 	private static final int BOX_X = 10;
-	private static final int BOX_Y = 200;
+	private static final int BOX_Y = 100;
 	private boolean isTouchingPlatform;
 	private Rectangle r1;
 	private int lives = 0;
+	
+	private Rectangle boundingBox;
+    private BufferedImage image;
+    private boolean imageLoaded = false;
 	
 	public Player(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent) {
 		super(gameComponent,x, y, xVelocity, yVelocity, SIZE , SIZE);
 		isTouchingPlatform = false;
 		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
 		lives = 3;
+		
+		try {
+            image = ImageIO.read(Enemy.class.getResource("goose.png"));
+            this.imageLoaded = (image != null);
+        } catch (IOException | IllegalArgumentException ex) {
+            this.imageLoaded = false; 
+        }
 	}
 
 	public Player(int width, int height, GameComponent gameComponent) {
@@ -40,6 +56,14 @@ public class Player extends GameObject {
 		isTouchingPlatform = false;
 		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
 		lives = 3;
+		
+		try {
+            image = ImageIO.read(Enemy.class.getResource("student.png"));
+            this.imageLoaded = (image != null);
+        } catch (IOException | IllegalArgumentException ex) {
+            this.imageLoaded = false; 
+        }
+
 
 	}
 
@@ -141,9 +165,15 @@ public class Player extends GameObject {
 	
 	@Override
 	public void drawOn(Graphics2D g) {
-		g.setColor(new Color(0, 255, 0));
-		g.fill( this.getBoundingBox() );
+
+		if (this.imageLoaded) {
+			g.drawImage(this.image, ((int) getBoundingBox().x), ((int) getBoundingBox().y), BOX_SIZE, BOX_SIZE, null);
+    	} else {
+    		g.setColor(new Color(0, 255, 0));
+    		g.fill( this.getBoundingBox() );
+    	}
 	}
+
 
 	@Override
 	public void onRemove() {   

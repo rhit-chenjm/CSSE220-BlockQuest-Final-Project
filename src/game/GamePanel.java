@@ -3,6 +3,7 @@ package game;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.InputMismatchException;
 
 import javax.swing.JPanel;
 
@@ -30,10 +31,14 @@ public class GamePanel extends JPanel {
                     case KeyEvent.VK_UP: 
                     	canvas.setPlayerYSpeed(-2);
                     	break;
+                    	
                     default:
-                    	canvas.setPlayerXSpeed(0);
-                    	canvas.setPlayerYSpeed(0);
-                    	break;
+                    	// No key is matched.
+                    	throw new InputMismatchException("Wrong key!");
+                    	
+                    	// canvas.setPlayerXSpeed(0);
+                    	// canvas.setPlayerYSpeed(0);
+                    	// break;
                 }}});
 //=======
 //            	System.out.println(e.getKeyCode());
