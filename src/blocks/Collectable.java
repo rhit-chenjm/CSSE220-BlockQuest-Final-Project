@@ -20,18 +20,20 @@ public class Collectable extends AbstractBlock {
 //	private boolean bounced;
 	
 	private Rectangle boundingBox;
-    private BufferedImage image;
-    private boolean imageLoaded = false;
+    protected BufferedImage image;
+    protected boolean imageLoaded = false;
 	
+    // Default constructor
 	public Collectable(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent) {
 		super(x, y, xVelocity, yVelocity, gameComponent, WIDTH, HEIGHT);
+	}
+	
+	// To be called by child objects so size is variable
+	public Collectable(int x, int y, int xVelocity, int yVelocity, int width, int height, GameComponent gameComponent) {
+		super(x, y, xVelocity, yVelocity, gameComponent, width, height);
 		
-		try {
-            image = ImageIO.read(Enemy.class.getResource("coin.png"));
-            this.imageLoaded = (image != null);
-        } catch (IOException | IllegalArgumentException ex) {
-            this.imageLoaded = false; 
-        }
+		this.width = width;
+		this.height = height;
 	}
 
 	public boolean willRemove() {

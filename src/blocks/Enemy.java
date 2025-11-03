@@ -23,20 +23,13 @@ public class Enemy extends AbstractBlock implements Drawable {
 	private boolean bounced;
 
 	private Rectangle boundingBox;
-    private BufferedImage image;
-    private boolean imageLoaded = false;
+    protected BufferedImage image;
+    protected boolean imageLoaded = false;
 	
 	public Enemy(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent) {
 		super(x, y, xVelocity, yVelocity, gameComponent, WIDTH, HEIGHT);
 		
 		this.boundingBox = new Rectangle(x, y, WIDTH, HEIGHT);
-		
-		try {
-            image = ImageIO.read(Enemy.class.getResource("goose.png"));
-            this.imageLoaded = (image != null);
-        } catch (IOException | IllegalArgumentException ex) {
-            this.imageLoaded = false; 
-        }
 	}
 
 	public boolean willRemove() {
@@ -46,7 +39,7 @@ public class Enemy extends AbstractBlock implements Drawable {
 	public void collideWithBlock(AbstractBlock otherBlock ) {
 		this.reverseDirection();
 		this.update();
-		bounced =true;
+		bounced = true;
 	}
 	
 	// handles movement, offscreen interactions, platform interactions, etc.

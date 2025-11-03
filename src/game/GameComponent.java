@@ -19,10 +19,13 @@ import entities.Background;
 import entities.Platform;
 //import blocks.Entity;
 import blocks.Enemy;
+import blocks.Goose;
 import blocks.Player;
 
 import blocks.Collectable;
+import blocks.DollarBill;
 import blocks.AbstractBlock;
+import blocks.Coin;
 import blocks.Player;
 import entities.Platform;
 
@@ -54,15 +57,15 @@ public class GameComponent extends JComponent {
 		this.lowTestPlatform = new Platform(250, 400, 300, 20);
 		this.platforms.add(this.testPlatform);
 		this.platforms.add(this.lowTestPlatform);
-		this.testLowCollectable = new Collectable(300, 100, 0, 0, this);
-		this.testHighCollectable = new Collectable (100, 80, 0, 0, this);
+		this.testLowCollectable = new Coin(300, 100, 0, 0, this);
+		this.testHighCollectable = new DollarBill(100, 80, 0, 0, this);
 		this.collectables.add(this.testLowCollectable);
 		this.collectables.add(this.testHighCollectable);
 		this.player =  new Player(10, 0, this);
-		this.enemies.add(new Enemy(200, 100, 5, 0, this));
-		this.enemies.add(new Enemy(30,  100, 0, 5, this));
-		this.enemies.add(new Enemy(130, 150, 0, 5, this));
-		this.enemies.add(new Enemy(230, 200, 0, 5, this));
+		this.enemies.add(new Goose(200, 100, 5, 0, this));
+		this.enemies.add(new Goose(30,  100, 0, 5, this));
+		this.enemies.add(new Goose(130, 150, 0, 5, this));
+		this.enemies.add(new Goose(230, 200, 0, 5, this));
 
 	}
 

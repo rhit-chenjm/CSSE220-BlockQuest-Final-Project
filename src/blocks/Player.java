@@ -31,7 +31,7 @@ public class Player extends GameObject {
 	private static final int BOX_Y = 100;
 	private boolean isTouchingPlatform;
 	private Rectangle r1;
-	private int lives = 0;
+	private int lives = 5;
 	private boolean isInvincible;
 	
     private BufferedImage image;
