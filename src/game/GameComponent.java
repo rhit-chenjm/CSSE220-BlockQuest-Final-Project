@@ -22,7 +22,6 @@ import blocks.Enemy;
 import blocks.Player;
 
 import blocks.Collectable;
-import blocks.Enemy;
 import blocks.AbstractBlock;
 import blocks.Player;
 import entities.Platform;
@@ -33,9 +32,10 @@ import entities.Platform;
 public class GameComponent extends JComponent {
 	//state of the game
 	private int numTicks;
+	private int compareTicks;
 
 	// creating test fields
-	private List<AbstractBlock> enemies = new ArrayList<>();
+	private List<Enemy> enemies = new ArrayList<>();
 	private Player player;
 	private List<Platform> platforms = new ArrayList<>();
 	private Platform testPlatform;
@@ -95,9 +95,20 @@ public class GameComponent extends JComponent {
 		updateEnemies();
 		handleCollisions();
 		updatePlayer();
+		handleInvincibilityframes();
 		this.numTicks++;
 	}
-
+	public void handleInvincibilityframes() {
+		if(!this.player.getInvincibility()) {
+			this.compareTicks++;
+		}
+		else{
+			if(this.numTicks- this.compareTicks > 120) {
+				this.player.setIsInvincible(false);
+				this.compareTicks = this.numTicks;
+			}
+		}
+	}
 	private void handleCollisions() {
 		List<GameObject> allObjects = new ArrayList<>();
 		
@@ -114,6 +125,7 @@ public class GameComponent extends JComponent {
 					else e.gravity = 1;
 				}
 			}
+			
 		}
 		// Prevents player from falling through platforms
 		boolean pChangedGravity = false;
@@ -128,8 +140,11 @@ public class GameComponent extends JComponent {
 			}
 		}
 		
+		// Player and Collectable interaction
+		this.player.checkForCollectableCollision(collectables);
+		
 		// handles player/enemy collision
-//		this.player.checkForEnemyCollision(enemies);
+		this.player.checkForEnemyCollision(enemies);
 
 		// removes objects when certain conditions are met
 		List<GameObject> shouldRemove = new ArrayList<>();

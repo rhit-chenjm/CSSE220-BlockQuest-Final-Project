@@ -32,12 +32,14 @@ public class Player extends GameObject {
 	private boolean isTouchingPlatform;
 	private Rectangle r1;
 	private int lives = 0;
+	private boolean isInvincible;
 	
     private BufferedImage image;
     private boolean imageLoaded = false;
 
 	public Player(int width, int height, GameComponent gameComponent) {
 		super(gameComponent, BOX_X, BOX_Y, STARTING_DX, STARTING_DY, SIZE, SIZE);
+		this.isInvincible = false;
 		isTouchingPlatform = false;
 		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
 		lives = 3;
@@ -55,16 +57,16 @@ public class Player extends GameObject {
 	@Override
 	public void update() {
 		if ( isOffScreen() == 1 ) {
-			this.xVelocity = -this.xVelocity;
+			this.xVelocity /= -2;
 			this.x = 0;
 		} else if(isOffScreen() == 2) {
-			this.xVelocity = -this.xVelocity;
+			this.xVelocity /= -2;
 			this.x = super.gameComponent.getWidth()-super.width;
 		} else if(isOffScreen() == 3) {
-			this.yVelocity = -this.yVelocity;
+			this.yVelocity /= -2;
 			this.y = 0;
 		} else if(isOffScreen() == 4) {
-			this.yVelocity = -this.yVelocity;
+			this.yVelocity /= -2;
 			this.y = super.gameComponent.getHeight()-super.height;
 
 		}
@@ -79,14 +81,9 @@ public class Player extends GameObject {
 		this.yVelocity += 0.05 * gravity;
 		super.update();
 
-		if(xVelocity > 0) {
-			this.xVelocity -= 0.01;
-		} else if(xVelocity < 0) {
-			this.xVelocity += 0.01;
-		}
-
 		
 	}
+
 	
 	// methods for changing fields of Player
 	public void setXSpeed(double c1) {
@@ -106,12 +103,14 @@ public class Player extends GameObject {
 	}
 	
 	public void subtractLife() {
-		this.lives -= 1;
+		if(!this.isInvincible) {
+			this.lives -= 1;
+		}
 	}
 	public void collideWithEnemy(Enemy e) {
 		if(super.overlapsGameObject(e)) {
 			subtractLife();
-			System.out.println("hit");
+			this.isInvincible = true;
 		}
 	}
 	public void checkForEnemyCollision(List<Enemy> enemies) {
@@ -142,6 +141,28 @@ public class Player extends GameObject {
 	public void setTouchingPlatform(boolean b1) {
 		isTouchingPlatform = b1;
 	}
+	public void setIsInvincible(boolean b1) {
+		this.isInvincible = b1;
+	}
+	public boolean getInvincibility() {
+		return this.isInvincible;
+	}
+	public int returnLives() {
+		return this.lives;
+	}
+	
+	public void collideWithCollectable(Collectable c) {
+		if(super.overlapsGameObject(c)) {
+			System.out.println("player on collectable");
+			
+			// implement something to do something
+		}
+	}
+	public void checkForCollectableCollision(List<Collectable> collectables) {
+		for (Collectable c1 : collectables) {
+			collideWithCollectable(c1);
+		}
+	}
 	
 	
 	@Override
@@ -160,5 +181,4 @@ public class Player extends GameObject {
 	public void onRemove() {   
 		//do nothing
 	}
-
 }
