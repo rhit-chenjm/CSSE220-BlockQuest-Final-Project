@@ -1,7 +1,12 @@
 package blocks;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import game.GameComponent;
 
@@ -14,8 +19,19 @@ public class Collectable extends AbstractBlock {
 	private int health = 1;
 //	private boolean bounced;
 	
+	private Rectangle boundingBox;
+    private BufferedImage image;
+    private boolean imageLoaded = false;
+	
 	public Collectable(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent) {
 		super(x, y, xVelocity, yVelocity, gameComponent, WIDTH, HEIGHT);
+		
+		try {
+            image = ImageIO.read(Enemy.class.getResource("coin.png"));
+            this.imageLoaded = (image != null);
+        } catch (IOException | IllegalArgumentException ex) {
+            this.imageLoaded = false; 
+        }
 	}
 
 	public boolean willRemove() {
@@ -28,8 +44,13 @@ public class Collectable extends AbstractBlock {
 	}
 
 	public void drawOn(Graphics2D g) {
-		g.setColor(new Color(120, 0, 120));			
-		g.fill(new Rectangle2D.Double(getBoundingBox().x, getBoundingBox().y, this.getWidth(), this.getHeight()));
+		
+		if (this.imageLoaded) {
+			g.drawImage(this.image, ((int) getBoundingBox().x), ((int) getBoundingBox().y), WIDTH, HEIGHT, null);
+    	} else {
+    		g.setColor(new Color(120, 0, 120));			
+    		g.fill(new Rectangle2D.Double(getBoundingBox().x, getBoundingBox().y, this.getWidth(), this.getHeight()));   	}
+		
 	}
 
 	@Override

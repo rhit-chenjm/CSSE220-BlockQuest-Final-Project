@@ -15,6 +15,9 @@ public class Background implements Drawable {
     private boolean imageLoaded = false;
     private int levelID;
     
+    private final int WIDTH = 1000;
+    private final int HEIGHT = 1000;
+    
     public Background(int levelID) {
     	this.levelID = levelID;
     }
@@ -41,10 +44,10 @@ public class Background implements Drawable {
 		if (imageLoaded) {
 						
 			// 500 x 500 panel
-    		g2.drawImage(image, 0, 0, 500, 500, null);
+    		g2.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
     	} else {
     	    g2.setColor(Color.PINK);
-    		g2.fill(new Rectangle(0, 0, 500, 500));
+    		g2.fill(new Rectangle(0, 0, WIDTH, HEIGHT));
     	}
 	}
 }
