@@ -24,12 +24,18 @@ public class GamePanel extends JPanel {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT: 
                         canvas.setPlayerXSpeed(-2);
+                        canvas.playerCanCollect(false);
                         break;
                     case KeyEvent.VK_RIGHT: 
                     	canvas.setPlayerXSpeed(2);
+                    	canvas.playerCanCollect(false);
                     	break;
                     case KeyEvent.VK_UP: 
                     	canvas.setPlayerYSpeed(-2);
+                    	canvas.playerCanCollect(false);
+                    	break;
+                    case KeyEvent.VK_DOWN:
+                    	canvas.playerCanCollect(true);
                     	break;
                     default:
                     	// No key is matched.

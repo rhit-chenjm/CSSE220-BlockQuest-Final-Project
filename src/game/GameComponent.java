@@ -190,4 +190,8 @@ public class GameComponent extends JComponent {
 	public void addPlayerYSpeed(double i) {
 		this.player.addYSpeed(i);
 	}
+
+	public void playerCanCollect(boolean b) {
+		this.player.isHoldingDown = b;
+	}
 }
