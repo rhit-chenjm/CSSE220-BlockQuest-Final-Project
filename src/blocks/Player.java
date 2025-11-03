@@ -22,6 +22,7 @@ import game.GameObject;
 public class Player extends GameObject {
 	
 	public int gravity = 1;
+	public boolean isHoldingDown = true;
 	public static final int SIZE = 80;
 	private static final int STARTING_DX = 0;
 	private static final int STARTING_DY = 0;
@@ -154,8 +155,10 @@ public class Player extends GameObject {
 	public void collideWithCollectable(Collectable c) {
 		if(super.overlapsGameObject(c)) {
 			System.out.println("player on collectable");
-			
 			// implement something to do something
+			if (isHoldingDown) {
+				c.health = 0;
+			}
 		}
 	}
 	public void checkForCollectableCollision(List<Collectable> collectables) {
