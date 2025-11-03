@@ -151,6 +151,20 @@ public class Player extends GameObject {
 		return this.lives;
 	}
 	
+	public void collideWithCollectable(Collectable c) {
+		if(super.overlapsGameObject(c)) {
+			System.out.println("player on collectable");
+			
+			// implement something to do something
+		}
+	}
+	public void checkForCollectableCollision(List<Collectable> collectables) {
+		for (Collectable c1 : collectables) {
+			collideWithCollectable(c1);
+		}
+	}
+	
+	
 	@Override
 	public void drawOn(Graphics2D g) {
 
@@ -167,5 +181,4 @@ public class Player extends GameObject {
 	public void onRemove() {   
 		//do nothing
 	}
-
 }
