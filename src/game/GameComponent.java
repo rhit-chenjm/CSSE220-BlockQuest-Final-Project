@@ -114,6 +114,7 @@ public class GameComponent extends JComponent {
 	}
 	private void handleCollisions() {
 		List<GameObject> allObjects = new ArrayList<>();
+		allObjects.addAll(collectables);
 		
 		// Prevents enemies from falling through platforms
 		for (AbstractBlock e: enemies) {
@@ -155,6 +156,9 @@ public class GameComponent extends JComponent {
 		for(GameObject object: allObjects){
 			if(object.shouldRemove()){
 				shouldRemove.add(object);
+				// moves deleted object offscreen, may only work with collectables
+				object.x = -500;
+				object.y = -500;
 			}
 		}
 
@@ -188,5 +192,9 @@ public class GameComponent extends JComponent {
 	}
 	public void addPlayerYSpeed(double i) {
 		this.player.addYSpeed(i);
+	}
+
+	public void playerCanCollect(boolean b) {
+		this.player.isHoldingDown = b;
 	}
 }

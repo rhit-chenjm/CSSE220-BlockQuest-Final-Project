@@ -16,7 +16,7 @@ import game.GameComponent;
 public class Collectable extends AbstractBlock {
 	private static final int WIDTH = 30;
 	private static final int HEIGHT = 30;
-	private int health = 1;
+	public int health = 1;
 //	private boolean bounced;
 	
 	private Rectangle boundingBox;
