@@ -114,6 +114,7 @@ public class GameComponent extends JComponent {
 					else e.gravity = 1;
 				}
 			}
+			
 		}
 		// Prevents player from falling through platforms
 		boolean pChangedGravity = false;
@@ -127,6 +128,9 @@ public class GameComponent extends JComponent {
 				else player.gravity = 1;
 			}
 		}
+		
+		// Player and Collectable interaction
+		this.player.checkForCollectableCollision(collectables);
 		
 		// handles player/enemy collision
 //		this.player.checkForEnemyCollision(enemies);

@@ -31,7 +31,6 @@ public class GamePanel extends JPanel {
                     case KeyEvent.VK_UP: 
                     	canvas.setPlayerYSpeed(-2);
                     	break;
-                    	
                     default:
                     	// No key is matched.
                     	throw new InputMismatchException("Wrong key!");

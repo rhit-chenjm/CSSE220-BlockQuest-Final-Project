@@ -41,6 +41,11 @@ public class Collectable extends AbstractBlock {
 	public boolean shouldRemove() {
 		return willRemove();
 	}
+
+	public boolean overlaps(Player player) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 
