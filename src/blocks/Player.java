@@ -33,23 +33,8 @@ public class Player extends GameObject {
 	private Rectangle r1;
 	private int lives = 0;
 	
-	private Rectangle boundingBox;
     private BufferedImage image;
     private boolean imageLoaded = false;
-	
-	public Player(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent) {
-		super(gameComponent,x, y, xVelocity, yVelocity, SIZE , SIZE);
-		isTouchingPlatform = false;
-		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
-		lives = 3;
-		
-		try {
-            image = ImageIO.read(Enemy.class.getResource("goose.png"));
-            this.imageLoaded = (image != null);
-        } catch (IOException | IllegalArgumentException ex) {
-            this.imageLoaded = false; 
-        }
-	}
 
 	public Player(int width, int height, GameComponent gameComponent) {
 		super(gameComponent, BOX_X, BOX_Y, STARTING_DX, STARTING_DY, SIZE, SIZE);
@@ -63,8 +48,6 @@ public class Player extends GameObject {
         } catch (IOException | IllegalArgumentException ex) {
             this.imageLoaded = false; 
         }
-
-
 	}
 
 
@@ -152,8 +135,6 @@ public class Player extends GameObject {
 			this.gravity = 1;
 		}
 
-		
-
 	}
 	public boolean isTouchingPlatform() {
 		return isTouchingPlatform;
@@ -179,10 +160,5 @@ public class Player extends GameObject {
 	public void onRemove() {   
 		//do nothing
 	}
-	
-	
-
-
-
 
 }
