@@ -46,7 +46,7 @@ public class GameComponent extends JComponent {
 	// holds things to be placed on the screen
 	private Background background1;
 	
-	private int currentLevel = 1;
+	private int currentLevel = 2;
 	private Level level;
 
 	public GameComponent() {

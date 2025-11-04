@@ -36,19 +36,24 @@ public class Level extends JComponent{
 	private Collectable testLowCollectable;
 	
 	
-	private Background background1;
+	private Background background;
 	
-	private int levelNumber = 1;
+	private int levelNumber = 2;
 	
 
 
 	
 	public Level(int levelNumber, GameComponent g) {
 		
-		switch (levelNumber) {
+		switch (levelNumber) { 
 		
 		case 1: {
 			levelOne(g);
+			break;
+		}
+		
+		case 2: {
+			levelTwo(g);
 			break;
 		}
 		
@@ -63,7 +68,7 @@ public class Level extends JComponent{
 	
 	
 	private void levelOne(GameComponent g) {
-		this.background1 = new Background(1);
+		this.background = new Background(1);
 		this.testPlatform = new Platform(30, 200, 200, 20);
 		this.lowTestPlatform = new Platform(250, 400, 300, 20);
 		this.floor = new Platform(-10, 750, 1020, 50);
@@ -82,8 +87,24 @@ public class Level extends JComponent{
 	
 	}
 	
+	private void levelTwo(GameComponent g) {
+		this.background = new Background(2);
+		this.testPlatform = new Platform(400, 200, 300, 20);
+		this.lowTestPlatform = new Platform(100, 200, 300, 20);
+		this.floor = new Platform(-10, 750, 1020, 50);
+		this.platforms.add(this.testPlatform);
+		this.platforms.add(this.floor);
+	 	this.testLowCollectable = new Coin(100, 100, 0, 0, g);
+		this.testHighCollectable = new DollarBill(300, 80, 0, 0, g);
+		this.collectables.add(this.testLowCollectable);
+		this.collectables.add(this.testHighCollectable);
+		this.player =  new Player(10, 0, g);
+		this.enemies.add(new Goose(200, 100, 5, 0, g));
+
+	}
+	
 	public void drawOn(Graphics2D g2) {
-		background1.drawOn(g2);
+		background.drawOn(g2);
 		for (Enemy enemy : this.enemies) {
 			enemy.drawOn(g2);
 		}
