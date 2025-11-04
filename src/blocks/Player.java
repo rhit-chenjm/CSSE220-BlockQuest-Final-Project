@@ -34,6 +34,7 @@ public class Player extends GameObject {
 	private Rectangle r1;
 	private int lives = 5;
 	private boolean isInvincible;
+	private boolean isFacingRight = true;
 	
     private BufferedImage image;
     private boolean imageLoaded = false;
@@ -72,7 +73,7 @@ public class Player extends GameObject {
 
 		}
 		if(isTouchingPlatform) {
-			if(xVelocity > 0) {
+			if (xVelocity >= 0) {
 				xVelocity -= 0.01;
 			} else {
 				xVelocity += 0.01;
@@ -172,21 +173,35 @@ public class Player extends GameObject {
 	public void drawOn(Graphics2D g) {
 
 		if (this.imageLoaded) {
+
+			// Don't swap directions if velocity is tiny.
 			
-			if (this.xVelocity >= 0) {
-				// Face right
-				g.drawImage(this.image, ((int) getBoundingBox().x), ((int) getBoundingBox().y), BOX_SIZE, BOX_SIZE, null);
-			} else {
-				// Face left
-				g.drawImage(this.image, ((int) getBoundingBox().x + BOX_SIZE), ((int) getBoundingBox().y), -BOX_SIZE, BOX_SIZE, null);
+			// If moving right, face right.
+			if (this.xVelocity > 0.01) {
+				this.isFacingRight = true;
 			}
 			
-    	} else {
-    		g.setColor(new Color(0, 255, 0));
-    		g.fill( this.getBoundingBox() );
-    	}
-	}
+			// If moving left, face left.
+			if (this.xVelocity < -0.01) {
+				this.isFacingRight = false;
+			}
 
+			if (this.isFacingRight) {
+				// Draw facing right.
+				g.drawImage(this.image, ((int) getBoundingBox().x), ((int) getBoundingBox().y), 
+						BOX_SIZE, BOX_SIZE, null);
+			} else {
+				// Draw facing left.
+				g.drawImage(this.image, ((int) getBoundingBox().x + BOX_SIZE), ((int) getBoundingBox().y), 
+						-BOX_SIZE, BOX_SIZE, null);
+			}
+
+		} else {
+			g.setColor(new Color(0, 255, 0));
+			g.fill(this.getBoundingBox());
+		}
+
+	}
 
 	@Override
 	public void onRemove() {   

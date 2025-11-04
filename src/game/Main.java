@@ -24,7 +24,7 @@ public class Main {
 	public Main() {
 	    final JFrame frame = new JFrame("Moving Object — Key Listener");
 	    GamePanel panel = new GamePanel();
-		frame.setSize(1000, 1000);
+		frame.setSize(1000, 800);
         frame.setContentPane(panel);   // add our game panel
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

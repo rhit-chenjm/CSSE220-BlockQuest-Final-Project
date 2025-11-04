@@ -30,6 +30,7 @@ public class Level extends JComponent{
 	private List<Platform> platforms = new ArrayList<>();
 	private Platform testPlatform;
 	private Platform lowTestPlatform;
+	private Platform floor;
 	private List<Collectable> collectables = new ArrayList<>();
 	private Collectable testHighCollectable;
 	private Collectable testLowCollectable;
@@ -65,8 +66,10 @@ public class Level extends JComponent{
 		this.background1 = new Background(1);
 		this.testPlatform = new Platform(30, 200, 200, 20);
 		this.lowTestPlatform = new Platform(250, 400, 300, 20);
+		this.floor = new Platform(-10, 750, 1020, 50);
 		this.platforms.add(this.testPlatform);
 		this.platforms.add(this.lowTestPlatform);
+		this.platforms.add(this.floor);
 	 	this.testLowCollectable = new Coin(300, 100, 0, 0, g);
 		this.testHighCollectable = new DollarBill(100, 80, 0, 0, g);
 		this.collectables.add(this.testLowCollectable);
