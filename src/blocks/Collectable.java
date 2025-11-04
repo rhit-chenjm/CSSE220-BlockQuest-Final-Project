@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
 import game.GameComponent;
 
 /**
@@ -48,13 +47,12 @@ public class Collectable extends AbstractBlock {
 	public void drawOn(Graphics2D g) {
 		
 		if (this.imageLoaded) {
-			g.drawImage(this.image, ((int) getBoundingBox().x), ((int) getBoundingBox().y), WIDTH, HEIGHT, null);
+			g.drawImage(this.image, ((int) getBoundingBox().x), ((int) getBoundingBox().y), (int) this.width, (int) this.height, null);
     	} else {
     		g.setColor(new Color(120, 0, 120));			
     		g.fill(new Rectangle2D.Double(getBoundingBox().x, getBoundingBox().y, this.getWidth(), this.getHeight()));   	}
-		
 	}
-
+	
 	@Override
 	public void onRemove() {
 		// not yet implemented
@@ -64,12 +62,9 @@ public class Collectable extends AbstractBlock {
 	public boolean shouldRemove() {
 		return willRemove();
 	}
-
+	
 	public boolean overlaps(Player player) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	
-	
-
 }

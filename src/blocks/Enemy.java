@@ -74,7 +74,13 @@ public class Enemy extends AbstractBlock implements Drawable {
 	public void drawOn(Graphics2D g2) {
 		
 		if (this.imageLoaded) {
+			
+			if (this.xVelocity >= 0) {
+			// Face right
 			g2.drawImage(this.image, ((int) getBoundingBox().x), ((int) getBoundingBox().y), WIDTH, HEIGHT, null);
+			} else {
+			g2.drawImage(this.image, ((int) getBoundingBox().x + WIDTH), ((int) getBoundingBox().y), -WIDTH, HEIGHT, null);
+			}
     	} else {
     		g2.setColor(new Color(255, 70, 0));			
     		g2.fill(new Rectangle2D.Double(getBoundingBox().x, getBoundingBox().y, this.getWidth(), this.getHeight()));    	}

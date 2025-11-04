@@ -172,7 +172,15 @@ public class Player extends GameObject {
 	public void drawOn(Graphics2D g) {
 
 		if (this.imageLoaded) {
-			g.drawImage(this.image, ((int) getBoundingBox().x), ((int) getBoundingBox().y), BOX_SIZE, BOX_SIZE, null);
+			
+			if (this.xVelocity >= 0) {
+				// Face right
+				g.drawImage(this.image, ((int) getBoundingBox().x), ((int) getBoundingBox().y), BOX_SIZE, BOX_SIZE, null);
+			} else {
+				// Face left
+				g.drawImage(this.image, ((int) getBoundingBox().x + BOX_SIZE), ((int) getBoundingBox().y), -BOX_SIZE, BOX_SIZE, null);
+			}
+			
     	} else {
     		g.setColor(new Color(0, 255, 0));
     		g.fill( this.getBoundingBox() );

@@ -54,7 +54,6 @@ public class GameComponent extends JComponent {
 		this.level = new Level(currentLevel, this);
 		setLevel(currentLevel);
 
-
 	}
 	
 	public void setLevel(int levelNumber) {
