@@ -1,6 +1,9 @@
 package blocks;
 import game.GameComponent;
 import game.GameObject;
+
+import java.util.List;
+
 import entities.Platform;
 
 /**
@@ -23,6 +26,21 @@ public abstract class AbstractBlock extends GameObject {
 	
 	public void collideWithPlatform( Platform other) {
 		if (this.yVelocity > 0) this.yVelocity = 0;
+	}
+
+	public void checkForPlatformCollision(List<Platform> platforms) {
+		boolean eChangedGravity = false;
+		for (Platform p: platforms) {
+			if (!eChangedGravity) {
+				if (this.overlaps(p)) {
+					this.collideWithPlatform(p);
+					this.gravity = 0;
+					eChangedGravity = true;
+				}
+				else this.gravity = 1;
+			}
+		}
+		
 	}
 	
 

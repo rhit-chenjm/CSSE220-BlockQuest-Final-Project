@@ -105,31 +105,11 @@ public class GameComponent extends JComponent {
 		
 		// Prevents enemies from falling through platforms
 		for (AbstractBlock e: enemies) {
-			boolean eChangedGravity = false;
-			for (Platform p: platforms) {
-				if (!eChangedGravity) {
-					if (e.overlaps(p)) {
-						e.collideWithPlatform(p);
-						e.gravity = 0;
-						eChangedGravity = true;
-					}
-					else e.gravity = 1;
-				}
-			}
-			
+			e.checkForPlatformCollision( platforms );
 		}
+		
 		// Prevents player from falling through platforms
-		boolean pChangedGravity = false;
-		for (entities.Platform p: platforms) {
-			if (!pChangedGravity) {
-				if (player.overlaps(p)){
-					player.collideWithPlatform(p);
-					player.gravity = 0;
-					pChangedGravity = true;
-				}
-				else player.gravity = 1;
-			}
-		}
+		this.player.checkForPlatformCollision( platforms );
 		
 		// Player and Collectable interaction
 		this.player.checkForCollectableCollision(collectables);

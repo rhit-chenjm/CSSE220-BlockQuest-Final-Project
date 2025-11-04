@@ -35,6 +35,7 @@ public class Player extends GameObject {
 	private int lives = 5;
 	private boolean isInvincible;
 	private boolean isFacingRight = true;
+	private int score = 0;
 	
     private BufferedImage image;
     private boolean imageLoaded = false;
@@ -155,10 +156,10 @@ public class Player extends GameObject {
 	
 	public void collideWithCollectable(Collectable c) {
 		if(super.overlapsGameObject(c)) {
-			System.out.println("player on collectable");
-			// implement something to do something
 			if (isHoldingDown) {
+				this.score ++;
 				c.health = 0;
+				System.out.println(this.score);
 			}
 		}
 	}
@@ -206,5 +207,21 @@ public class Player extends GameObject {
 	@Override
 	public void onRemove() {   
 		//do nothing
+	}
+
+
+	public void checkForPlatformCollision(List<Platform> platforms) {
+		boolean pChangedGravity = false;
+		for (entities.Platform p: platforms) {
+			if (!pChangedGravity) {
+				if (this.overlaps(p)){
+					this.collideWithPlatform(p);
+					this.gravity = 0;
+					pChangedGravity = true;
+				}
+				else this.gravity = 1;
+			}
+		}
+		
 	}
 }
