@@ -10,6 +10,7 @@ import javax.swing.JComponent;
 import blocks.AbstractBlock;
 import blocks.Collectable;
 import blocks.Enemy;
+import blocks.Goose;
 import blocks.Player;
 import game.GameComponent;
 
@@ -69,10 +70,10 @@ public class Level extends JComponent{
 		this.collectables.add(this.testLowCollectable);
 		this.collectables.add(this.testHighCollectable);
 		this.player =  new Player(10, 0, g);
-		this.enemies.add(new Enemy(200, 100, 5, 0, g));
-		this.enemies.add(new Enemy(30,  100, 0, 5, g));
-		this.enemies.add(new Enemy(130, 150, 0, 5, g));
-		this.enemies.add(new Enemy(230, 200, 0, 5, g));
+		this.enemies.add(new Goose(200, 100, 5, 0, g));
+		this.enemies.add(new Goose(30,  100, 0, 5, g));
+		this.enemies.add(new Goose(130, 150, 0, 5, g));
+		this.enemies.add(new Goose(230, 200, 0, 5, g));
 	
 	}
 	
