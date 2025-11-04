@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 import entities.Background;
+import entities.Level;
 //import drops.AbstractDrop;
 //import drops.DamagingDrop;
 //import drops.HealingDrop;
@@ -36,37 +37,36 @@ public class GameComponent extends JComponent {
 	//state of the game
 	private int numTicks;
 	private int compareTicks;
-
-	// creating test fields
-	private List<Enemy> enemies = new ArrayList<>();
+	private List<Enemy> enemies;
 	private Player player;
-	private List<Platform> platforms = new ArrayList<>();
-	private Platform testPlatform;
-	private Platform lowTestPlatform;
-	private List<Collectable> collectables = new ArrayList<>();
-	private Collectable testHighCollectable;
-	private Collectable testLowCollectable;
+	private List<Platform> platforms;
+	private List<Collectable> collectables;
+	
 	
 	// holds things to be placed on the screen
 	private Background background1;
+	
+	private int currentLevel = 1;
+	private Level level;
 
 	public GameComponent() {
 		
-		this.background1 = new Background(1);
-		this.testPlatform = new Platform(30, 200, 200, 20);
-		this.lowTestPlatform = new Platform(250, 400, 300, 20);
-		this.platforms.add(this.testPlatform);
-		this.platforms.add(this.lowTestPlatform);
-		this.testLowCollectable = new Coin(300, 100, 0, 0, this);
-		this.testHighCollectable = new DollarBill(100, 80, 0, 0, this);
-		this.collectables.add(this.testLowCollectable);
-		this.collectables.add(this.testHighCollectable);
-		this.player =  new Player(10, 0, this);
-		this.enemies.add(new Goose(200, 100, 5, 0, this));
-		this.enemies.add(new Goose(30,  100, 0, 5, this));
-		this.enemies.add(new Goose(130, 150, 0, 5, this));
-		this.enemies.add(new Goose(230, 200, 0, 5, this));
+		this.level = new Level(currentLevel, this);
+		setLevel(currentLevel);
 
+
+	}
+	
+	public void setLevel(int levelNumber) {
+		this.currentLevel = levelNumber;
+		this.level = new Level(levelNumber, this);
+		
+		this.player = level.getPlayer();
+		this.enemies = level.getEnemies();
+		this.platforms = level.getPlatforms();
+		this.collectables = level.getCollectables();
+		
+		repaint();
 	}
 
 	public void drawScreen() {
@@ -78,20 +78,8 @@ public class GameComponent extends JComponent {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
-		this.background1.drawOn(g2);
+		level.drawOn(g2);
 		
-		for (AbstractBlock enemy : this.enemies) {
-			enemy.drawOn(g2);
-		}
-		
-		this.player.drawOn(g2);
-		for (Platform platform : this.platforms) {
-			platform.drawOn(g2);
-		}
-		
-		for (Collectable collectable : this.collectables) {
-			collectable.drawOn(g2);
-		}
 	}
 
 	public void updateState() {
@@ -197,4 +185,4 @@ public class GameComponent extends JComponent {
 	public void playerCanCollect(boolean b) {
 		this.player.isHoldingDown = b;
 	}
-}
+} 

@@ -1,9 +1,7 @@
 package entities;
 
-import java.awt.Color;
-import java.awt.Graphics;
+
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,7 @@ import game.GameComponent;
 public class Level extends JComponent{
 	
 	
-	private List<AbstractBlock> enemies = new ArrayList<>();
+	private List<Enemy> enemies = new ArrayList<>();
 	private Player player;
 	private List<Platform> platforms = new ArrayList<>();
 	private Platform testPlatform;
@@ -66,8 +64,8 @@ public class Level extends JComponent{
 		this.lowTestPlatform = new Platform(250, 400, 300, 20);
 		this.platforms.add(this.testPlatform);
 		this.platforms.add(this.lowTestPlatform);
-	 	this.testLowCollectable = new Collectable(300, 100, 0, 0, null);
-		this.testHighCollectable = new Collectable (100, 80, 0, 0, null);
+	 	this.testLowCollectable = new Collectable(300, 100, 0, 0, g);
+		this.testHighCollectable = new Collectable (100, 80, 0, 0, g);
 		this.collectables.add(this.testLowCollectable);
 		this.collectables.add(this.testHighCollectable);
 		this.player =  new Player(10, 0, g);
@@ -75,13 +73,12 @@ public class Level extends JComponent{
 		this.enemies.add(new Enemy(30,  100, 0, 5, g));
 		this.enemies.add(new Enemy(130, 150, 0, 5, g));
 		this.enemies.add(new Enemy(230, 200, 0, 5, g));
-
 	
 	}
 	
 	public void drawOn(Graphics2D g2) {
 		background1.drawOn(g2);
-		for (AbstractBlock enemy : this.enemies) {
+		for (Enemy enemy : this.enemies) {
 			enemy.drawOn(g2);
 		}
 		
@@ -93,6 +90,7 @@ public class Level extends JComponent{
 		for (Collectable collectable : this.collectables) {
 			collectable.drawOn(g2);
 		}
+		
 	}
 	
 	
@@ -100,9 +98,9 @@ public class Level extends JComponent{
 		return this.player;
 	}
 	
-//	public List<Enemy> getEnemies(){
-//		return this.enemies;
-//	}
+	public List<Enemy> getEnemies(){
+		return this.enemies;
+	}
 	 
 	public List<Platform> getPlatforms(){
 		return this.platforms;
