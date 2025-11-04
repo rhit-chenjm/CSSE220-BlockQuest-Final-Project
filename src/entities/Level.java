@@ -57,8 +57,6 @@ public class Level extends JComponent{
 			
 		}
 		}
-		
-		
 	}
 	
 	
@@ -74,11 +72,11 @@ public class Level extends JComponent{
 		this.testHighCollectable = new DollarBill(100, 80, 0, 0, g);
 		this.collectables.add(this.testLowCollectable);
 		this.collectables.add(this.testHighCollectable);
-		this.player =  new Player(10, 0, g);
 		this.enemies.add(new Goose(200, 100, 5, 0, g));
 		this.enemies.add(new Goose(30,  100, 0, 5, g));
 		this.enemies.add(new Goose(130, 150, 0, 5, g));
 		this.enemies.add(new Goose(230, 200, 0, 5, g));
+		this.player =  new Player(10, 0, g);
 	
 	}
 	
