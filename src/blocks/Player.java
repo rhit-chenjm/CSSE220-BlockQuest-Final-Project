@@ -184,4 +184,20 @@ public class Player extends GameObject {
 	public void onRemove() {   
 		//do nothing
 	}
+
+
+	public void checkForPlatformCollision(List<Platform> platforms) {
+		boolean pChangedGravity = false;
+		for (entities.Platform p: platforms) {
+			if (!pChangedGravity) {
+				if (this.overlaps(p)){
+					this.collideWithPlatform(p);
+					this.gravity = 0;
+					pChangedGravity = true;
+				}
+				else this.gravity = 1;
+			}
+		}
+		
+	}
 }
