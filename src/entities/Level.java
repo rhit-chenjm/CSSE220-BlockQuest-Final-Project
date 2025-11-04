@@ -8,7 +8,9 @@ import java.util.List;
 import javax.swing.JComponent;
 
 import blocks.AbstractBlock;
+import blocks.Coin;
 import blocks.Collectable;
+import blocks.DollarBill;
 import blocks.Enemy;
 import blocks.Goose;
 import blocks.Player;
@@ -65,8 +67,8 @@ public class Level extends JComponent{
 		this.lowTestPlatform = new Platform(250, 400, 300, 20);
 		this.platforms.add(this.testPlatform);
 		this.platforms.add(this.lowTestPlatform);
-	 	this.testLowCollectable = new Collectable(300, 100, 0, 0, g);
-		this.testHighCollectable = new Collectable (100, 80, 0, 0, g);
+	 	this.testLowCollectable = new Coin(300, 100, 0, 0, g);
+		this.testHighCollectable = new DollarBill(100, 80, 0, 0, g);
 		this.collectables.add(this.testLowCollectable);
 		this.collectables.add(this.testHighCollectable);
 		this.player =  new Player(10, 0, g);
