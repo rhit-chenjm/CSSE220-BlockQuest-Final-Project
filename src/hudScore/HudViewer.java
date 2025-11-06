@@ -9,17 +9,21 @@ public class HudViewer extends JLabel {
 	
 	public HudViewer() {
 		setOpaque(false);
-		setForeground(new Color(230, 240, 255));
+		setForeground(new Color(0, 0, 0));
         setFont(getFont().deriveFont(Font.BOLD, 13f));
 	}
 	
 	public void refresh(HudModel hud) {
-        StringBuilder html = new StringBuilder(
-            "<html><h2 style='margin:0;padding:0;'>Score</h2><ol>"
-        );
-        html.append("<li>Current: ").append(hud.getScore()).append("</li>");
-        html.append("</ol></html>");
-        setText(html.toString());
+//        StringBuilder html = new StringBuilder(
+//            "<html><h2 style='margin:0;padding:0;'>Score</h2><ol>"
+//        );
+//        html.append("<li>Current: ").append(hud.getScore()).append("</li>");
+//        html.append("</ol></html>");
+//        setText(html.toString());
+		
+		StringBuilder html = new StringBuilder("");
+		html.append("Test1: ").append(hud.getScore()).append("");
+		setText(html.toString());
     }
 
 }

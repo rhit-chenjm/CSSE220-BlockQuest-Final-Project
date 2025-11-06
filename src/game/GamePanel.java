@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.InputMismatchException;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 
@@ -24,10 +25,13 @@ public class GamePanel extends JPanel {
     	JPanel layered = new JPanel();
         layered.setLayout(new OverlayLayout(layered));
         layered.setOpaque(false);  // Make layered panel transparent
+        
+    
+        canvas.setOpaque(false);    
         // view
         layered.add(hudView); 
     	layered.add(canvas);
-    	layered.add(canvas);
+        layered.add(canvas);
 
     	hudView.setOpaque(false);         // Transparent so no gray background
     	hudView.setAlignmentX(0f);        // Left edge
@@ -37,6 +41,7 @@ public class GamePanel extends JPanel {
     	// PANEL LAYOUT
     	this.setLayout(new BorderLayout());
     	this.add(layered, BorderLayout.CENTER);
+//    	this.setBackground(canvas.getBackground());
     	
     
     	
@@ -100,6 +105,13 @@ public class GamePanel extends JPanel {
     
     public GameComponent getGameComponent() {
     	return canvas;
+    }
+    
+    //attempting to fix hud
+    private void tick() {
+    	hudModel.setScore(5);
+    	hudView.refresh(hudModel);
+    	canvas.repaint();
     }
 
 }
