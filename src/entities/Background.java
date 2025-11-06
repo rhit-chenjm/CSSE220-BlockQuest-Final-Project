@@ -40,6 +40,19 @@ public class Background implements Drawable {
 		case 2:
 			
 			try {
+				// Fall Background
+				this.image = ImageIO.read(Platform.class.getResource("FallLevelBackground.jpg"));
+	            imageLoaded = (image != null);
+	        } catch (IOException | IllegalArgumentException ex) {
+	            imageLoaded = false; 
+	        }
+			
+			break;
+			
+			
+		case 3:
+			
+			try {
 				// Winter Background
 				this.image = ImageIO.read(Platform.class.getResource("WinterLevelBackground.jpg"));
 	            imageLoaded = (image != null);
@@ -48,6 +61,20 @@ public class Background implements Drawable {
 	        }
 			
 			break;
+			
+			
+		case 4:
+			
+			try {
+				// Winter Background
+				this.image = ImageIO.read(Platform.class.getResource("Level4Background.jpg"));
+	            imageLoaded = (image != null);
+	        } catch (IOException | IllegalArgumentException ex) {
+	            imageLoaded = false; 
+	        }
+			
+			break;
+			
 			
 		default:
 			throw new IllegalArgumentException("No level declared.");

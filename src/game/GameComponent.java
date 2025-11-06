@@ -49,7 +49,7 @@ public class GameComponent extends JComponent {
 	// holds things to be placed on the screen
 	private Background background1;
 	
-	private int currentLevel = 2;
+	private int currentLevel = 4;
 	private Level level;
 
 	public GameComponent(HudViewer v1, HudModel m1) {

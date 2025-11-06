@@ -16,9 +16,11 @@ import blocks.Goose;
 import blocks.Player;
 import game.GameComponent;
 
-/*
+/**
  * @author Kathryn Jonas
+ * @function 
  */
+
 
 
 
@@ -37,9 +39,6 @@ public class Level extends JComponent{
 	
 	
 	private Background background;
-	
-	private int levelNumber = 2;
-	
 
 
 	
@@ -54,6 +53,16 @@ public class Level extends JComponent{
 		
 		case 2: {
 			levelTwo(g);
+			break;
+		}
+		
+		case 3: {
+			levelThree(g);
+			break;
+		}
+		
+		case 4: {
+			levelFour(g);
 			break;
 		}
 		
@@ -100,6 +109,48 @@ public class Level extends JComponent{
 		this.enemies.add(new Goose(200, 100, 5, 0, g));
 
 	}
+	
+	private void levelThree(GameComponent g) {
+		//background
+		this.background = new Background(3);
+		//platforms
+		this.platforms.add(new Platform(300, 600, 900, 20));
+		this.platforms.add(new Platform(50, 50, 100, 20));
+		this.platforms.add(new Platform(600, 100, 600, 20));
+		this.platforms.add(new Platform(100, 200, 300, 20));
+		this.platforms.add(new Platform(-10, 750, 1020, 50));
+		//collectables
+		this.collectables.add(new Coin(350, 550, 0, 0, g));
+		this.collectables.add(new Coin(500, 600, 0, 0, g));
+		this.collectables.add(new DollarBill(150, 300, 0, 0, g));
+		//enemies
+		this.enemies.add(new Goose(100, 200, 5, 0, g));
+		this.enemies.add(new Goose(500, 600, 0, 5, g));
+		//player
+		this.player = new Player(10, 0, g);
+	
+	}
+	
+	
+	private void levelFour(GameComponent g) {
+		//background
+		this.background = new Background(4);
+		//platforms
+		this.platforms.add(new Platform(675, 400, 800, 20));
+		this.platforms.add(new Platform(200, 100, 300, 20));
+		this.platforms.add(new Platform(50, 600, 900, 20));
+		//collectables
+		this.collectables.add(new Coin(500, 500, 0, 0, g));
+		
+		//enemies
+		this.enemies.add(new Goose(400, 200, 5, 0, g));
+		
+		//player
+		this.player = new Player(10, 0, g);
+		
+	}
+	
+	
 	
 	public void drawOn(Graphics2D g2) {
 		background.drawOn(g2);
