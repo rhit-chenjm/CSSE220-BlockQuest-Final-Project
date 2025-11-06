@@ -49,7 +49,7 @@ public class GameComponent extends JComponent {
 	// holds things to be placed on the screen
 	private Background background1;
 	
-	private int currentLevel = 4;
+	private int currentLevel = 1;
 	private Level level;
 
 	public GameComponent(HudViewer v1, HudModel m1) {
@@ -91,7 +91,8 @@ public class GameComponent extends JComponent {
 		handleCollisions();
 		updatePlayer();
 		handleInvincibilityframes();
-
+		handleGameOver(); 
+		handlelevelChanges();
 		this.numTicks++;
 	}
     private void updateText() {
@@ -173,5 +174,25 @@ public class GameComponent extends JComponent {
 
 	public void playerCanCollect(boolean b) {
 		this.player.isHoldingDown = b;
+	}
+	public void handleGameOver() {
+		if(this.player.returnLives() < 1) {
+			setLevel(5);
+		}
+	}
+	public void handlelevelChanges() {
+		boolean isReady = true;
+		for(Collectable c : collectables) {
+			if(c.isAlive()) {
+				isReady = false;
+			}
+			
+		}
+		if(isReady) {
+			setLevel(level.getLevelNumber() + 1);
+		}
+		System.out.println(isReady);
+
+
 	}
 } 

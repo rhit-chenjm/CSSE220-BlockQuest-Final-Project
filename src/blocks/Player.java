@@ -32,7 +32,7 @@ public class Player extends GameObject {
 	private static final int BOX_Y = 100;
 	private boolean isTouchingPlatform;
 	private Rectangle r1;
-	private int lives = 5;
+	private int lives;
 	private boolean isInvincible;
 	private boolean isFacingRight = true;
 	private int score = 0;
@@ -45,7 +45,7 @@ public class Player extends GameObject {
 		this.isInvincible = false;
 		isTouchingPlatform = false;
 		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
-		lives = 3;
+		this.lives = 3;
 		
 		try {
             image = ImageIO.read(Enemy.class.getResource("student.png"));

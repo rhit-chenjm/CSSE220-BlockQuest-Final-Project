@@ -66,5 +66,12 @@ public class Collectable extends AbstractBlock {
 	public boolean overlaps(Player player) {
 		return false;
 	}
+	public boolean isAlive() {
+		if(this.health < 1) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 	
 }

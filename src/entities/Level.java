@@ -36,15 +36,19 @@ public class Level extends JComponent{
 	private List<Collectable> collectables = new ArrayList<>();
 	private Collectable testHighCollectable;
 	private Collectable testLowCollectable;
-	
+	private int levelNumber;
 	
 	private Background background;
 
 
 	
 	public Level(int levelNumber, GameComponent g) {
-		
+		this.levelNumber = levelNumber;
 		switch (levelNumber) { 
+		case 0: {
+			levelZero(g);
+			break;
+		}
 		
 		case 1: {
 			levelOne(g);
@@ -73,7 +77,12 @@ public class Level extends JComponent{
 		}
 	}
 	
-	
+	public int getLevelNumber() {
+		return this.levelNumber;
+	}
+	private void levelZero(GameComponent g) {
+		
+	}
 	private void levelOne(GameComponent g) {
 		this.background = new Background(1);
 		this.testPlatform = new Platform(30, 200, 200, 20);
