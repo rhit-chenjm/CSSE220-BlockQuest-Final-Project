@@ -16,9 +16,11 @@ import blocks.Goose;
 import blocks.Player;
 import game.GameComponent;
 
-/*
+/**
  * @author Kathryn Jonas
+ * @function 
  */
+
 
 
 
