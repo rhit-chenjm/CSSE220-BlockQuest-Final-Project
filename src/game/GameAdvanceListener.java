@@ -5,9 +5,11 @@ import java.awt.event.ActionListener;
 public class GameAdvanceListener implements ActionListener {
 
 	private GameComponent gameComponent;
+	private GamePanel gamePanel;
 
-	public GameAdvanceListener(GameComponent gameComponent) {
+	public GameAdvanceListener(GamePanel gamePanel, GameComponent gameComponent) {
 		this.gameComponent = gameComponent;
+		this.gamePanel = gamePanel;
 	}
 
 	@Override
@@ -24,5 +26,9 @@ public class GameAdvanceListener implements ActionListener {
 //		System.out.println()
 		this.gameComponent.updateState();
 		this.gameComponent.drawScreen();
+		this.gamePanel.refresh();
+    	this.gameComponent.repaint();
+
+
 	}
 }

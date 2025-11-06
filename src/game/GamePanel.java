@@ -15,12 +15,14 @@ import hudScore.HudViewer;
  * player controls, some formatting
  */
 public class GamePanel extends JPanel {
-	private final HudModel hudModel = new HudModel();
-	private final HudViewer hudView = new HudViewer();
+	private HudModel hudModel = new HudModel();
+	private HudViewer hudView = new HudViewer();
 	
 	
     private final GameComponent canvas = new GameComponent(hudView, hudModel);
+    
     public GamePanel() {
+
     	JPanel layered = new JPanel();
         layered.setLayout(new OverlayLayout(layered));
         layered.setOpaque(false);  // Make layered panel transparent
@@ -100,6 +102,9 @@ public class GamePanel extends JPanel {
     
     public GameComponent getGameComponent() {
     	return canvas;
+    }
+    public void refresh() {
+    	hudView.refresh(hudModel);
     }
 
 }

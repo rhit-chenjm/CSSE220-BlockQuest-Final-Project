@@ -31,7 +31,7 @@ public class Main {
 	
 //		JButton button = new JButton("Click me");
 //		frame.add(button, BorderLayout.SOUTH);
-		GameAdvanceListener advanceListener = new GameAdvanceListener(panel.getGameComponent());
+		GameAdvanceListener advanceListener = new GameAdvanceListener(panel, panel.getGameComponent());
 		
 		Timer timer = new Timer(DELAY, advanceListener);
 		timer.start();

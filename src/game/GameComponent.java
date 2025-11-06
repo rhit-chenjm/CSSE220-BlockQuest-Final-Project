@@ -70,19 +70,17 @@ public class GameComponent extends JComponent {
 		this.enemies = level.getEnemies();
 		this.platforms = level.getPlatforms();
 		this.collectables = level.getCollectables();
-		
 		repaint();
 	}
 
 	public void drawScreen() {
-		this.repaint();
+		repaint();
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		
 		level.drawOn(g2);
 		
 	}
@@ -93,6 +91,7 @@ public class GameComponent extends JComponent {
 		handleCollisions();
 		updatePlayer();
 		handleInvincibilityframes();
+
 		this.numTicks++;
 	}
     private void updateText() {
