@@ -1,11 +1,18 @@
 package entities;
 
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import blocks.AbstractBlock;
 import blocks.Coin;
@@ -20,12 +27,7 @@ import game.GameComponent;
  * @author Kathryn Jonas
  * @function 
  */
-
-
-
-
 public class Level extends JComponent{
-	
 	
 	private List<Enemy> enemies = new ArrayList<>();
 	private Player player;
@@ -37,11 +39,19 @@ public class Level extends JComponent{
 	private Collectable testHighCollectable;
 	private Collectable testLowCollectable;
 	private int levelNumber;
+
 	
 	private Background background;
-
-
 	
+	
+	private JLabel label = new JLabel();
+	private int numBalls = 0;
+	private int numStrikes = 0;
+	
+	public void updateLabel(int numBalls, int numStrikes) {
+		this.label.setText("<html>Balls: " + numBalls + "<br />Strikes: " + numStrikes + "</HTML>");
+	}
+
 	public Level(int levelNumber, GameComponent g) {
 		this.levelNumber = levelNumber;
 		switch (levelNumber) { 
@@ -70,10 +80,15 @@ public class Level extends JComponent{
 			break;
 		}
 		
+		case 5: {
+			gameOver(g);
+			break;
+		}
+		
 		default: {
 			throw new IllegalArgumentException("Unexpected value: " + levelNumber);		
 			
-		}
+			}
 		}
 	}
 	
@@ -140,7 +155,6 @@ public class Level extends JComponent{
 	
 	}
 	
-	
 	private void levelFour(GameComponent g) {
 		//background
 		this.background = new Background(4);
@@ -156,10 +170,55 @@ public class Level extends JComponent{
 		
 		//player
 		this.player = new Player(10, 0, g);
-		
 	}
 	
-	
+	private void gameOver(GameComponent g) {
+//		//player
+//		this.player = new Player(10, 0, g);
+//		JFrame frame = new JFrame();
+//
+//		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 6));
+//		JButton addBall = new JButton("Add Ball");
+//		JButton addStrike = new JButton("Add Strike");
+//
+//		frame.add(label, BorderLayout.CENTER);
+//		frame.add(panel, BorderLayout.SOUTH);
+//
+//		panel.setLayout(new FlowLayout());
+//		panel.setPreferredSize(new Dimension(300, 60));
+//
+//		addBall.addActionListener(e -> {
+//			if (numBalls < 3) {
+//				numBalls++;
+//			} else {
+//				numBalls = 0;
+//				numStrikes = 0;
+//			}
+//
+//			this.updateLabel(numBalls, numStrikes);
+//		});
+//
+//		addStrike.addActionListener(e -> {
+//			if (numStrikes < 2) {
+//				numStrikes++;
+//			} else {
+//				numBalls = 0;
+//				numStrikes = 0;
+//			}
+//
+//			this.updateLabel(numBalls, numStrikes);
+//		});
+//
+//		panel.add(addBall);
+//		panel.add(addStrike);
+//
+//		// The following line is given to show you how to use the given method:
+//		updateLabel(0, 0);
+//
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.pack();
+//		frame.setVisible(true);
+	}
 	
 	public void drawOn(Graphics2D g2) {
 		background.drawOn(g2);
@@ -175,9 +234,7 @@ public class Level extends JComponent{
 		for (Collectable collectable : this.collectables) {
 			collectable.drawOn(g2);
 		}
-		
 	}
-	
 	
 	public Player getPlayer() {
 		return this.player;
@@ -194,8 +251,4 @@ public class Level extends JComponent{
 	public List<Collectable> getCollectables(){
 		return this.collectables;
 	}
-	
-
-	
-
 }

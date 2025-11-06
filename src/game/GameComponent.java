@@ -1,4 +1,5 @@
 package game;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -56,6 +57,9 @@ public class GameComponent extends JComponent {
 		
 		this.level = new Level(currentLevel, this);
 		setLevel(currentLevel);
+		// added to try to fix hud
+//		this.setPreferredSize(new Dimension(100,100));
+		// added to try to fix hud
 		this.viewer = v1;
 		this.model = m1;
 	    setOpaque(true);
