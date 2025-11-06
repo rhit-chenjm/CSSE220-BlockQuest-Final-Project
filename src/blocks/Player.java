@@ -104,6 +104,9 @@ public class Player extends GameObject {
 	public void addYPos(double c1) {
 		super.y += c1;
 	}
+	public int getScore() {
+		return this.score;
+	}
 	
 	public void subtractLife() {
 		if(!this.isInvincible) {

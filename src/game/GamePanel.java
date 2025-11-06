@@ -6,16 +6,44 @@ import java.awt.event.KeyEvent;
 import java.util.InputMismatchException;
 
 import javax.swing.JPanel;
+import javax.swing.OverlayLayout;
+
+import hudScore.HudModel;
+import hudScore.HudViewer;
 
 /**
  * player controls, some formatting
  */
 public class GamePanel extends JPanel {
-    private final GameComponent canvas = new GameComponent();
+	private final HudModel hudModel = new HudModel();
+	private final HudViewer hudView = new HudViewer();
+	
+	
+    private final GameComponent canvas = new GameComponent(hudView, hudModel);
     public GamePanel() {
-        this.setLayout(new BorderLayout(8,8));
-//		this.setBackground(GameComponent.BG);
-		this.add(canvas,BorderLayout.CENTER);
+    	JPanel layered = new JPanel();
+        layered.setLayout(new OverlayLayout(layered));
+        layered.setOpaque(false);  // Make layered panel transparent
+        // view
+        layered.add(hudView); 
+    	layered.add(canvas);
+    	layered.add(canvas);
+
+    	hudView.setOpaque(false);         // Transparent so no gray background
+    	hudView.setAlignmentX(0f);        // Left edge
+    	hudView.setAlignmentY(0f);        // Top edge
+    	layered.add(hudView);             // Add after canvas → goes on top
+       
+    	// PANEL LAYOUT
+    	this.setLayout(new BorderLayout());
+    	this.add(layered, BorderLayout.CENTER);
+    	
+    
+    	
+    	
+    	
+    	
+
 		this.addKeyListener(new KeyAdapter() {
 			
             @Override
@@ -69,6 +97,7 @@ public class GamePanel extends JPanel {
 		requestFocusInWindow();      // ask for focus
 
             }
+    
     public GameComponent getGameComponent() {
     	return canvas;
     }

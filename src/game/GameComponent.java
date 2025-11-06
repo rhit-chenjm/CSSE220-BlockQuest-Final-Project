@@ -18,6 +18,8 @@ import entities.Level;
 //import drops.HealingDrop;
 //import drops.InvincibilityDrop;
 import entities.Platform;
+import hudScore.HudModel;
+import hudScore.HudViewer;
 //import blocks.Entity;
 import blocks.Enemy;
 import blocks.Goose;
@@ -41,7 +43,8 @@ public class GameComponent extends JComponent {
 	private Player player;
 	private List<Platform> platforms;
 	private List<Collectable> collectables;
-	
+	private HudViewer viewer;
+	private HudModel model;
 	
 	// holds things to be placed on the screen
 	private Background background1;
@@ -49,10 +52,13 @@ public class GameComponent extends JComponent {
 	private int currentLevel = 1;
 	private Level level;
 
-	public GameComponent() {
+	public GameComponent(HudViewer v1, HudModel m1) {
 		
 		this.level = new Level(currentLevel, this);
 		setLevel(currentLevel);
+		this.viewer = v1;
+		this.model = m1;
+	    setOpaque(true);
 
 	}
 	
@@ -82,12 +88,17 @@ public class GameComponent extends JComponent {
 	}
 
 	public void updateState() {
+		updateText();
 		updateEnemies();
 		handleCollisions();
 		updatePlayer();
 		handleInvincibilityframes();
 		this.numTicks++;
 	}
+    private void updateText() {
+    	this.model.setScore(player.getScore());
+    	this.viewer.refresh(model);
+    }
 	public void handleInvincibilityframes() {
 		if(!this.player.getInvincibility()) {
 			this.compareTicks++;
