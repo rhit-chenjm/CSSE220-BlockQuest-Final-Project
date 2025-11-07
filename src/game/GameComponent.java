@@ -19,8 +19,9 @@ import entities.Level;
 //import drops.HealingDrop;
 //import drops.InvincibilityDrop;
 import entities.Platform;
-import hudScore.HudModel;
-import hudScore.HudViewer;
+//import hudScore.HudModel;
+import hudScore.HudPanel;
+//import hudScore.HudViewer;
 //import blocks.Entity;
 import blocks.Enemy;
 import blocks.Goose;
@@ -44,8 +45,10 @@ public class GameComponent extends JComponent {
 	private Player player;
 	private List<Platform> platforms;
 	private List<Collectable> collectables;
-	private HudViewer viewer;
-	private HudModel model;
+//	private HudViewer viewer;
+//	private HudModel model;
+	
+	private HudPanel hudPanel = new HudPanel();
 	
 	// holds things to be placed on the screen
 	private Background background1;
@@ -53,16 +56,13 @@ public class GameComponent extends JComponent {
 	private int currentLevel = 1;
 	private Level level;
 
-	public GameComponent(HudViewer v1, HudModel m1) {
+	public GameComponent(HudPanel h1) {
 		
 		this.level = new Level(currentLevel, this);
 		setLevel(currentLevel);
-		// added to try to fix hud
-//		this.setPreferredSize(new Dimension(100,100));
-		// added to try to fix hud
-		this.viewer = v1;
-		this.model = m1;
-	    setOpaque(true);
+//		this.viewer = v1;
+//		this.model = m1;
+		this.hudPanel = h1;
 
 	}
 	
@@ -70,7 +70,7 @@ public class GameComponent extends JComponent {
 		this.currentLevel = levelNumber;
 		this.level = new Level(levelNumber, this);
 		
-		this.player = level.getPlayer();
+		this.setPlayer(level.getPlayer());
 		this.enemies = level.getEnemies();
 		this.platforms = level.getPlatforms();
 		this.collectables = level.getCollectables();
@@ -86,6 +86,7 @@ public class GameComponent extends JComponent {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		level.drawOn(g2);
+		hudPanel.drawHud(g2);
 		
 	}
 
@@ -97,19 +98,20 @@ public class GameComponent extends JComponent {
 		handleInvincibilityframes();
 		handleGameOver(); 
 		handlelevelChanges();
+		handleHudChanges();
 		this.numTicks++;
 	}
     private void updateText() {
-    	this.model.setScore(player.getScore());
-    	this.viewer.refresh(model);
+//    	this.model.setScore(player.getScore());
+//    	this.viewer.refresh(model);
     }
 	public void handleInvincibilityframes() {
-		if(!this.player.getInvincibility()) {
+		if(!this.getPlayer().getInvincibility()) {
 			this.compareTicks++;
 		}
 		else{
 			if(this.numTicks- this.compareTicks > 120) {
-				this.player.setIsInvincible(false);
+				this.getPlayer().setIsInvincible(false);
 				this.compareTicks = this.numTicks;
 			}
 		}
@@ -124,13 +126,13 @@ public class GameComponent extends JComponent {
 		}
 		
 		// Prevents player from falling through platforms
-		this.player.checkForPlatformCollision( platforms );
+		this.getPlayer().checkForPlatformCollision( platforms );
 		
 		// Player and Collectable interaction
-		this.player.checkForCollectableCollision(collectables);
+		this.getPlayer().checkForCollectableCollision(collectables);
 		
 		// handles player/enemy collision
-		this.player.checkForEnemyCollision(enemies);
+		this.getPlayer().checkForEnemyCollision(enemies);
 
 		// removes objects when certain conditions are met
 		List<GameObject> shouldRemove = new ArrayList<>();
@@ -152,35 +154,35 @@ public class GameComponent extends JComponent {
 		}
 	}
 	private void updatePlayer() {
-		this.player.update();
+		this.getPlayer().update();
 	}
 		
 	public void togglePlayerDirection() {
-		this.player.reverseDirection();
+		this.getPlayer().reverseDirection();
 	}
 	
 	public void setPlayerXSpeed(double c) {
-		this.player.setXSpeed(c);
+		this.getPlayer().setXSpeed(c);
 	}
 	
 	public void setIsCollidingWithPlatform(boolean b1) {
-		this.player.setTouchingPlatform(b1);
+		this.getPlayer().setTouchingPlatform(b1);
 		System.out.println(b1);
 		}
 	
 	public void setPlayerYSpeed(int i) {
-		this.player.addYPos(-4);
-		this.player.setYSpeed(i);
+		this.getPlayer().addYPos(-4);
+		this.getPlayer().setYSpeed(i);
 	}
 	public void addPlayerYSpeed(double i) {
-		this.player.addYSpeed(i);
+		this.getPlayer().addYSpeed(i);
 	}
 
 	public void playerCanCollect(boolean b) {
-		this.player.isHoldingDown = b;
+		this.getPlayer().isHoldingDown = b;
 	}
 	public void handleGameOver() {
-		if(this.player.returnLives() < 1) {
+		if(this.getPlayer().returnLives() < 1) {
 			setLevel(5);
 		}
 	}
@@ -198,5 +200,16 @@ public class GameComponent extends JComponent {
 		System.out.println(isReady);
 
 
+	}
+	public void handleHudChanges() {
+		
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 } 

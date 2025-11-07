@@ -26,8 +26,9 @@ public class GameAdvanceListener implements ActionListener {
 //		System.out.println()
 		this.gameComponent.updateState();
 		this.gameComponent.drawScreen();
-		this.gamePanel.refresh();
+		this.gamePanel.updateHud();
     	this.gameComponent.repaint();
+    	
 
 
 	}

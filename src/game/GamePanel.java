@@ -9,18 +9,16 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 
-import hudScore.HudModel;
-import hudScore.HudViewer;
-
+import hudScore.HudPanel;
 /**
  * player controls, some formatting
  */
 public class GamePanel extends JPanel {
-	private HudModel hudModel = new HudModel();
-	private HudViewer hudView = new HudViewer();
+	private HudPanel hudPanel = new HudPanel();
+	private int storedLives = 0;
+	private int storedScore = 0;
 	
-	
-    private final GameComponent canvas = new GameComponent(hudView, hudModel);
+    private final GameComponent canvas = new GameComponent(hudPanel);
     
     public GamePanel() {
 
@@ -28,29 +26,20 @@ public class GamePanel extends JPanel {
         layered.setLayout(new OverlayLayout(layered));
         layered.setOpaque(false);  // Make layered panel transparent
         
-    
         canvas.setOpaque(false);    
         // view
-        layered.add(hudView); 
     	layered.add(canvas);
-        layered.add(canvas);
 
-    	hudView.setOpaque(false);         // Transparent so no gray background
-    	hudView.setAlignmentX(0f);        // Left edge
-    	hudView.setAlignmentY(0f);        // Top edge
-    	layered.add(hudView);             // Add after canvas → goes on top
+    	hudPanel.setOpaque(false);         // Transparent so no gray background
+    	hudPanel.setAlignmentX(0f);        // Left edge
+    	hudPanel.setAlignmentY(0f);        // Top edge
+    	layered.add(hudPanel);             // Add after canvas → goes on top
        
     	// PANEL LAYOUT
     	this.setLayout(new BorderLayout());
     	this.add(layered, BorderLayout.CENTER);
-//    	this.setBackground(canvas.getBackground());
-    	
+    	this.setBackground(canvas.getBackground());
     
-    	
-    	
-    	
-    	
-
 		this.addKeyListener(new KeyAdapter() {
 			
             @Override
@@ -75,31 +64,7 @@ public class GamePanel extends JPanel {
                     default:
                     	// No key is matched.
                     	throw new InputMismatchException("Wrong key!");
-                    	
-                    	// canvas.setPlayerXSpeed(0);
-                    	// canvas.setPlayerYSpeed(0);
-                    	// break;
-                }}});
-//=======
-//            	System.out.println(e.getKeyCode());
-//            	if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-//                    canvas.setPlayerXSpeed(-10);
-//                    canvas.setPlayerYSpeed(0);
-//            	} else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-//                	canvas.setPlayerXSpeed(10);
-//                	canvas.setPlayerYSpeed(0);
-//            	} else if(e.getKeyCode() == KeyEvent.VK_DOWN){
-//                	canvas.setPlayerXSpeed(0);
-//                	canvas.setPlayerYSpeed(10);
-//            	}else if(e.getKeyCode() == KeyEvent.VK_UP){
-//                	canvas.setPlayerXSpeed(0);
-//                	canvas.setPlayerYSpeed(-10);
-//            	} else {
-//            		canvas.setPlayerXSpeed(0);
-//            		canvas.setAlignmentY(0);
-//            		
-//            	}
-//            	e.setKeyCode(0);               
+                }}});            
 		setFocusable(true);          // must be focusable to get keys
 		requestFocusInWindow();      // ask for focus
 
@@ -108,14 +73,14 @@ public class GamePanel extends JPanel {
     public GameComponent getGameComponent() {
     	return canvas;
     }
-    public void refresh() {
-    	hudView.refresh(hudModel);
-    }    
-    //attempting to fix hud
-    private void tick() {
-    	hudModel.setScore(5);
-    	hudView.refresh(hudModel);
-    	canvas.repaint();
+    public void updateHud() {
+    	int currentLives = canvas.getPlayer().returnLives();
+    	int currentScore = canvas.getPlayer().getScore();
+    	// below if statement improves game speed
+    	if (currentLives != this.storedLives || currentScore != this.storedScore){
+    		this.storedLives = currentLives;
+    		this.storedScore = currentScore;
+    		hudPanel.setHudText(this.storedLives, this.storedScore);
+    	}    
     }
-
 }
