@@ -45,8 +45,7 @@ public class GameComponent extends JComponent {
 	private Player player;
 	private List<Platform> platforms;
 	private List<Collectable> collectables;
-//	private HudViewer viewer;
-//	private HudModel model;
+
 	
 	private HudPanel hudPanel = new HudPanel();
 	
@@ -58,17 +57,18 @@ public class GameComponent extends JComponent {
 
 	public GameComponent(HudPanel h1) {
 		
-		this.level = new Level(currentLevel, this);
-		setLevel(currentLevel);
+		
+		this.level = new Level(currentLevel, this, 3);
+		setLevel(currentLevel, 3);
 //		this.viewer = v1;
 //		this.model = m1;
 		this.hudPanel = h1;
 
 	}
 	
-	public void setLevel(int levelNumber) {
+	public void setLevel(int levelNumber, int lives) {
 		this.currentLevel = levelNumber;
-		this.level = new Level(levelNumber, this);
+		this.level = new Level(levelNumber, this, level.getPlayer().getLives());
 		if(levelNumber > 0 && levelNumber < 5) {
 			this.setPlayer(level.getPlayer());
 			this.enemies = level.getEnemies();
@@ -190,7 +190,7 @@ public class GameComponent extends JComponent {
 	}
 	public void handleGameOver() {
 		if(this.getPlayer().returnLives() < 1) {
-			setLevel(6);
+			setLevel(6, 0);
 		}
 	}
 	public void handlelevelChanges() {
@@ -207,7 +207,7 @@ public class GameComponent extends JComponent {
 		}
 
 		if(isReady) {
-			setLevel(level.getLevelNumber() + 1);
+			setLevel(level.getLevelNumber() + 1, this.level.getPlayer().getLives());
 		}
 
 
@@ -223,5 +223,13 @@ public class GameComponent extends JComponent {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+	
+	public void pressButton() {
+		setLevel(1, 3);
+	}
+	
+	public int getLevel() {
+		return this.level.getLevelNumber();
 	}
 } 

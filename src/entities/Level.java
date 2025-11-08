@@ -39,21 +39,22 @@ public class Level extends JComponent{
 	private Collectable testHighCollectable;
 	private Collectable testLowCollectable;
 	private int levelNumber;
+	private Button button;
 
-	
 	private Background background;
-	
 	
 	private JLabel label = new JLabel();
 	private int numBalls = 0;
 	private int numStrikes = 0;
+	private int playerLives= 0;
 	
 	public void updateLabel(int numBalls, int numStrikes) {
 		this.label.setText("<html>Balls: " + numBalls + "<br />Strikes: " + numStrikes + "</HTML>");
 	}
 
-	public Level(int levelNumber, GameComponent g) {
+	public Level(int levelNumber, GameComponent g, int lives) {
 		this.levelNumber = levelNumber;
+		this.playerLives = lives;
 		switch (levelNumber) { 
 		case 0: {
 			levelZero(g);
@@ -118,8 +119,8 @@ public class Level extends JComponent{
 		this.enemies.add(new Goose(30,  100, 0, 5, g));
 		this.enemies.add(new Goose(130, 150, 0, 5, g));
 		this.enemies.add(new Goose(230, 200, 0, 5, g));
-		this.player =  new Player(10, 0, g);
-	
+
+		this.player = new Player(10, 0, 3, g);
 	}
 	
 	private void levelTwo(GameComponent g) {
@@ -133,8 +134,8 @@ public class Level extends JComponent{
 		this.testHighCollectable = new DollarBill(300, 80, 0, 0, g);
 		this.collectables.add(this.testLowCollectable);
 		this.collectables.add(this.testHighCollectable);
-		this.player =  new Player(10, 0, g);
 		this.enemies.add(new Goose(200, 100, 5, 0, g));
+		this.player = new Player(10,0, this.playerLives, g);
 
 	}
 	
@@ -155,8 +156,7 @@ public class Level extends JComponent{
 		this.enemies.add(new Goose(100, 200, 5, 0, g));
 		this.enemies.add(new Goose(500, 600, 0, 5, g));
 		//player
-		this.player = new Player(10, 0, g);
-	
+		this.player = new Player(10,0, this.playerLives, g);
 	}
 	
 	private void levelFour(GameComponent g) {
@@ -173,67 +173,25 @@ public class Level extends JComponent{
 		this.enemies.add(new Goose(400, 200, 5, 0, g));
 		
 		//player
-		this.player = new Player(10, 0, g);
-	}
+		this.player = new Player(10,0, this.playerLives, g);
+		}
 	
 	private void gameWin(GameComponent g) {
+		this.background = new Background(5);
 
 	}
 	
 	private void gameOver(GameComponent g) {
 		this.background = new Background(6);
 
-//		//player
-//		this.player = new Player(10, 0, g);
-//		JFrame frame = new JFrame();
-//
-//		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 6));
-//		JButton addBall = new JButton("Add Ball");
-//		JButton addStrike = new JButton("Add Strike");
-//
-//		frame.add(label, BorderLayout.CENTER);
-//		frame.add(panel, BorderLayout.SOUTH);
-//
-//		panel.setLayout(new FlowLayout());
-//		panel.setPreferredSize(new Dimension(300, 60));
-//
-//		addBall.addActionListener(e -> {
-//			if (numBalls < 3) {
-//				numBalls++;
-//			} else {
-//				numBalls = 0;
-//				numStrikes = 0;
-//			}
-//
-//			this.updateLabel(numBalls, numStrikes);
-//		});
-//
-//		addStrike.addActionListener(e -> {
-//			if (numStrikes < 2) {
-//				numStrikes++;
-//			} else {
-//				numBalls = 0;
-//				numStrikes = 0;
-//			}
-//
-//			this.updateLabel(numBalls, numStrikes);
-//		});
-//
-//		panel.add(addBall);
-//		panel.add(addStrike);
-//
-//		// The following line is given to show you how to use the given method:
-//		updateLabel(0, 0);
-//
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.pack();
-//		frame.setVisible(true);
+		//player
+		this.player = new Player(10, 0, 3, g);
+		this.button = new Button(250, 600, 500, 70, "Press Enter to Restart", g);
 	}
 	
 	public void drawOn(Graphics2D g2) {
 		background.drawOn(g2);
 		if(this.levelNumber < 5) {
-			
 			
 			for (Enemy enemy : this.enemies) {
 				enemy.drawOn(g2);
@@ -248,6 +206,9 @@ public class Level extends JComponent{
 				collectable.drawOn(g2);
 			}
 		}
+		
+		if (this.button != null) this.button.drawOn(g2);
+
 	}
 	
 	public Player getPlayer() {

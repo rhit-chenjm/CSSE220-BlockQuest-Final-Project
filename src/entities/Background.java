@@ -16,7 +16,7 @@ public class Background implements Drawable {
     private int levelID;
     
     private final int WIDTH = 1000;
-    private final int HEIGHT = 1000;
+    private final int HEIGHT = 900;
     
     public Background(int levelID) {
     	this.levelID = levelID;
@@ -75,10 +75,20 @@ public class Background implements Drawable {
 			
 			break;
 			
+		case 5:
+			
+			try {
+				this.image = ImageIO.read(Platform.class.getResource("GameWin.jpg"));
+	            imageLoaded = (image != null);
+	        } catch (IOException | IllegalArgumentException ex) {
+	            imageLoaded = false; 
+	        }
+			
+			break;
+			
 		case 6:
 			
 			try {
-				// Winter Background
 				this.image = ImageIO.read(Platform.class.getResource("GameOver.jpg"));
 	            imageLoaded = (image != null);
 	        } catch (IOException | IllegalArgumentException ex) {
