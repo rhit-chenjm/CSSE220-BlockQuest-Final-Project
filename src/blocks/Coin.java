@@ -25,6 +25,7 @@ public class Coin extends Collectable {
 		super(x, y, xVelocity, yVelocity, WIDTH, HEIGHT, gameComponent);
 		this.width = WIDTH;
 		this.height = HEIGHT;
+		this.type = "coin";
 		
 		try {
             this.image = ImageIO.read(Enemy.class.getResource("coin.png"));

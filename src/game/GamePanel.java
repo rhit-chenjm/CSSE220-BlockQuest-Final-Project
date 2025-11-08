@@ -62,8 +62,8 @@ public class GamePanel extends JPanel {
                     	canvas.playerCanCollect(true);
                     	break;
                     case KeyEvent.VK_ENTER:
-                    	// If game over:
-                    	if (canvas.getLevel() == 6)
+                    	// If game over or win:
+                    	if (canvas.getLevel() > 4)
                     	// Restart game.
                     	canvas.pressButton();
                     	break;

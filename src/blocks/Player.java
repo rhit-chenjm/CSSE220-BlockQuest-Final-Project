@@ -167,7 +167,8 @@ public class Player extends GameObject {
 	public void collideWithCollectable(Collectable c) {
 		if(super.overlapsGameObject(c)) {
 			if (isHoldingDown) {
-				this.score ++;
+				if (c.getType() == "coin") this.score ++;
+				if (c.getType() == "dollar_bill") this.score += 5;
 				c.health = 0;
 				System.out.println(this.score);
 			}
