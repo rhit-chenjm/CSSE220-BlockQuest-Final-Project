@@ -69,12 +69,15 @@ public class GameComponent extends JComponent {
 	public void setLevel(int levelNumber) {
 		this.currentLevel = levelNumber;
 		this.level = new Level(levelNumber, this);
-		
-		this.setPlayer(level.getPlayer());
-		this.enemies = level.getEnemies();
-		this.platforms = level.getPlatforms();
-		this.collectables = level.getCollectables();
+		if(levelNumber > 0 && levelNumber < 5) {
+			this.setPlayer(level.getPlayer());
+			this.enemies = level.getEnemies();
+			this.platforms = level.getPlatforms();
+			this.collectables = level.getCollectables();
+		}
 		repaint();
+
+
 	}
 
 	public void drawScreen() {
@@ -93,12 +96,16 @@ public class GameComponent extends JComponent {
 	public void updateState() {
 		updateText();
 		updateEnemies();
-		handleCollisions();
-		updatePlayer();
 		handleInvincibilityframes();
 		handleGameOver(); 
 		handlelevelChanges();
 		handleHudChanges();
+		if(this.level.getLevelNumber() < 5) {
+			updatePlayer();
+			handleCollisions();
+
+		}
+		
 		this.numTicks++;
 	}
     private void updateText() {
@@ -183,24 +190,29 @@ public class GameComponent extends JComponent {
 	}
 	public void handleGameOver() {
 		if(this.getPlayer().returnLives() < 1) {
-			setLevel(5);
+			setLevel(6);
 		}
 	}
 	public void handlelevelChanges() {
 		boolean isReady = true;
 		for(Collectable c : collectables) {
 			if(c.isAlive()) {
+				
 				isReady = false;
 			}
 			
 		}
+		if(this.level.getLevelNumber() > 4 || this.level.getLevelNumber() < 1) {
+			isReady = false;
+		}
+
 		if(isReady) {
 			setLevel(level.getLevelNumber() + 1);
 		}
-		System.out.println(isReady);
 
 
 	}
+
 	public void handleHudChanges() {
 		
 	}

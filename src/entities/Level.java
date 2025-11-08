@@ -81,6 +81,10 @@ public class Level extends JComponent{
 		}
 		
 		case 5: {
+			gameWin(g);
+			break;
+		}
+		case 6: {
 			gameOver(g);
 			break;
 		}
@@ -172,7 +176,13 @@ public class Level extends JComponent{
 		this.player = new Player(10, 0, g);
 	}
 	
+	private void gameWin(GameComponent g) {
+
+	}
+	
 	private void gameOver(GameComponent g) {
+		this.background = new Background(6);
+
 //		//player
 //		this.player = new Player(10, 0, g);
 //		JFrame frame = new JFrame();
@@ -222,17 +232,21 @@ public class Level extends JComponent{
 	
 	public void drawOn(Graphics2D g2) {
 		background.drawOn(g2);
-		for (Enemy enemy : this.enemies) {
-			enemy.drawOn(g2);
-		}
-		
-		this.player.drawOn(g2);
-		for (Platform platform : this.platforms) {
-			platform.drawOn(g2);
-		}
-		
-		for (Collectable collectable : this.collectables) {
-			collectable.drawOn(g2);
+		if(this.levelNumber < 5) {
+			
+			
+			for (Enemy enemy : this.enemies) {
+				enemy.drawOn(g2);
+			}
+			
+			this.player.drawOn(g2);
+			for (Platform platform : this.platforms) {
+				platform.drawOn(g2);
+			}
+			
+			for (Collectable collectable : this.collectables) {
+				collectable.drawOn(g2);
+			}
 		}
 	}
 	
