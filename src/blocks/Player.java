@@ -39,6 +39,7 @@ public class Player extends GameObject {
 	
     private BufferedImage image;
     private boolean imageLoaded = false;
+	private boolean storedInvincible;
 
 	public Player(int width, int height, GameComponent gameComponent) {
 		super(gameComponent, BOX_X, BOX_Y, STARTING_DX, STARTING_DY, SIZE, SIZE);
@@ -117,7 +118,31 @@ public class Player extends GameObject {
 		if(super.overlapsGameObject(e)) {
 			subtractLife();
 			this.isInvincible = true;
+			
+			// If the player starts being invincible, become red
+			if (this.isInvincible && this.storedInvincible != this.isInvincible) {
+				try {
+	            	image = ImageIO.read(Enemy.class.getResource("playerhit.png"));
+	            	this.imageLoaded = (image != null);
+	        	} catch (IOException | IllegalArgumentException ex) {
+	        		this.imageLoaded = false; 
+	        	}
+			}
 		}
+		
+		if (!super.overlapsGameObject(e)) {
+			// If the player stops being invincible, return to normal
+			if (!this.isInvincible && this.storedInvincible != this.isInvincible) {
+				try {
+					image = ImageIO.read(Enemy.class.getResource("student.png"));
+					this.imageLoaded = (image != null);
+				} catch (IOException | IllegalArgumentException ex) {
+					this.imageLoaded = false; 
+				}
+			}
+			this.storedInvincible = this.isInvincible;
+		}
+		
 	}
 	public void checkForEnemyCollision(List<Enemy> enemies) {
 		for (Enemy e1 : enemies) {
