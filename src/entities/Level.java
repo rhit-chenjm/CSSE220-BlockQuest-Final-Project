@@ -180,6 +180,7 @@ public class Level extends JComponent{
 		this.background = new Background(5);
 		this.player = new Player(10, 0, 2000, g);
 		this.button = new Button(250, 670, 500, 70, "Press Enter to Restart", g);
+		this.enemies.add(new Goose(430, 142, 5, 0, g));
 	}
 	
 	private void gameOver(GameComponent g) {
@@ -188,6 +189,8 @@ public class Level extends JComponent{
 		//player
 		this.player = new Player(10, 0, 3, g);
 		this.button = new Button(250, 600, 500, 70, "Press Enter to Restart", g);
+		this.enemies.add(new Goose(200, 355, 5, 0, g));
+		this.enemies.add(new Goose(700, 555, -5, 0, g));
 	}
 	
 	public void drawOn(Graphics2D g2) {
@@ -209,6 +212,13 @@ public class Level extends JComponent{
 		}
 		
 		if (this.button != null) this.button.drawOn(g2);
+		
+		// Game over and win screen
+		if (this.levelNumber >= 5) {
+			for (Enemy enemy : this.enemies) {
+				enemy.drawOn(g2);
+			}
+		}
 
 	}
 	
