@@ -40,13 +40,12 @@ public class Player extends GameObject {
     private BufferedImage image;
     private boolean imageLoaded = false;
 
-	public Player(int width, int height, GameComponent gameComponent) {
+	public Player(int width, int height, int lives, GameComponent gameComponent) {
 		super(gameComponent, BOX_X, BOX_Y, STARTING_DX, STARTING_DY, SIZE, SIZE);
 		this.isInvincible = false;
 		isTouchingPlatform = false;
 		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
-		this.lives = 3;
-		
+		this.lives = lives; 		
 		try {
             image = ImageIO.read(Enemy.class.getResource("student.png"));
             this.imageLoaded = (image != null);
@@ -55,6 +54,8 @@ public class Player extends GameObject {
         }
 	}
 
+
+	
 
 	// handles movement, offscreen interactions, platform interactions, etc.
 	@Override
@@ -106,6 +107,12 @@ public class Player extends GameObject {
 	}
 	public int getScore() {
 		return this.score;
+	}
+	public int getLives() {
+		return this.lives;
+	}
+	public void setLives(int lives) {
+		this.lives = lives;
 	}
 	
 	public void subtractLife() {
@@ -211,8 +218,13 @@ public class Player extends GameObject {
 	public void onRemove() {   
 		//do nothing
 	}
+	public void setX(int x) {
+		super.setX(x);
+	}
 
-
+	public void setY(int y) {
+		super.setY(y);
+	}
 	public void checkForPlatformCollision(List<Platform> platforms) {
 		boolean pChangedGravity = false;
 		for (entities.Platform p: platforms) {
