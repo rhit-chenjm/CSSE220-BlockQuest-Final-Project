@@ -41,12 +41,13 @@ public class Player extends GameObject {
     private boolean imageLoaded = false;
 	private boolean storedInvincible;
 
-	public Player(int width, int height, int lives, GameComponent gameComponent) {
+	public Player(int width, int height, int lives, int score, GameComponent gameComponent) {
 		super(gameComponent, BOX_X, BOX_Y, STARTING_DX, STARTING_DY, SIZE, SIZE);
 		this.isInvincible = false;
 		isTouchingPlatform = false;
 		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
 		this.lives = lives; 		
+		this.score = score;
 		try {
             image = ImageIO.read(Enemy.class.getResource("student.png"));
             this.imageLoaded = (image != null);

@@ -58,7 +58,7 @@ public class GameComponent extends JComponent {
 	public GameComponent(HudPanel h1) {
 		
 		
-		this.level = new Level(currentLevel, this, 3);
+		this.level = new Level(currentLevel, this, 3, 0);
 		setLevel(currentLevel, 3);
 //		this.viewer = v1;
 //		this.model = m1;
@@ -68,8 +68,9 @@ public class GameComponent extends JComponent {
 	
 	public void setLevel(int levelNumber, int lives) {
 		this.currentLevel = levelNumber;
-		this.level = new Level(levelNumber, this, level.getPlayer().getLives());
+		this.level = new Level(levelNumber, this, level.getPlayer().getLives(), level.getPlayer().getScore());
 		if(levelNumber > 0 && levelNumber < 5) {
+
 			this.setPlayer(level.getPlayer());
 			this.enemies = level.getEnemies();
 			this.platforms = level.getPlatforms();
