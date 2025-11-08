@@ -25,6 +25,7 @@ public class DollarBill extends Collectable {
 		super(x, y, xVelocity, yVelocity, WIDTH, HEIGHT, gameComponent);
 		this.width = WIDTH;
 		this.height = HEIGHT;
+		this.type = "dollar_bill";
 	
 		try {
             this.image = ImageIO.read(Enemy.class.getResource("dollar_bill.png"));

@@ -69,7 +69,7 @@ public class GameComponent extends JComponent {
 	public void setLevel(int levelNumber, int lives) {
 		this.currentLevel = levelNumber;
 		this.level = new Level(levelNumber, this, level.getPlayer().getLives());
-		if(levelNumber > 0 && levelNumber < 5) {
+		if(levelNumber > 0 && levelNumber < 4) {
 			this.setPlayer(level.getPlayer());
 			this.enemies = level.getEnemies();
 			this.platforms = level.getPlatforms();

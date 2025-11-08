@@ -178,7 +178,8 @@ public class Level extends JComponent{
 	
 	private void gameWin(GameComponent g) {
 		this.background = new Background(5);
-
+		this.player = new Player(10, 0, 2000, g);
+		this.button = new Button(250, 670, 500, 70, "Press Enter to Restart", g);
 	}
 	
 	private void gameOver(GameComponent g) {

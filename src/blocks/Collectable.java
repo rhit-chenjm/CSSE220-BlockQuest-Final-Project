@@ -16,6 +16,7 @@ public class Collectable extends AbstractBlock {
 	private static final int WIDTH = 30;
 	private static final int HEIGHT = 30;
 	public int health = 1;
+	public String type;
 //	private boolean bounced;
 	
 	private Rectangle boundingBox;
@@ -25,6 +26,7 @@ public class Collectable extends AbstractBlock {
     // Default constructor
 	public Collectable(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent) {
 		super(x, y, xVelocity, yVelocity, gameComponent, WIDTH, HEIGHT);
+		this.type = "collectable";
 	}
 	
 	// To be called by child objects so size is variable
@@ -61,6 +63,10 @@ public class Collectable extends AbstractBlock {
 	@Override
 	public boolean shouldRemove() {
 		return willRemove();
+	}
+	
+	public String getType() {
+		return this.type;
 	}
 	
 	public boolean overlaps(Player player) {
