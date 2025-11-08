@@ -46,13 +46,15 @@ public class Level extends JComponent{
 	private JLabel label = new JLabel();
 	private int numBalls = 0;
 	private int numStrikes = 0;
+	private int playerLives= 0;
 	
 	public void updateLabel(int numBalls, int numStrikes) {
 		this.label.setText("<html>Balls: " + numBalls + "<br />Strikes: " + numStrikes + "</HTML>");
 	}
 
-	public Level(int levelNumber, GameComponent g) {
+	public Level(int levelNumber, GameComponent g, int lives) {
 		this.levelNumber = levelNumber;
+		this.playerLives = lives;
 		switch (levelNumber) { 
 		case 0: {
 			levelZero(g);
@@ -117,7 +119,8 @@ public class Level extends JComponent{
 		this.enemies.add(new Goose(30,  100, 0, 5, g));
 		this.enemies.add(new Goose(130, 150, 0, 5, g));
 		this.enemies.add(new Goose(230, 200, 0, 5, g));
-		this.player =  new Player(10, 0, g);
+
+		this.player = new Player(10, 0, 3, g);
 	}
 	
 	private void levelTwo(GameComponent g) {
@@ -131,8 +134,8 @@ public class Level extends JComponent{
 		this.testHighCollectable = new DollarBill(300, 80, 0, 0, g);
 		this.collectables.add(this.testLowCollectable);
 		this.collectables.add(this.testHighCollectable);
-		this.player =  new Player(10, 0, g);
 		this.enemies.add(new Goose(200, 100, 5, 0, g));
+		this.player = new Player(10,0, this.playerLives, g);
 
 	}
 	
@@ -153,8 +156,7 @@ public class Level extends JComponent{
 		this.enemies.add(new Goose(100, 200, 5, 0, g));
 		this.enemies.add(new Goose(500, 600, 0, 5, g));
 		//player
-		this.player = new Player(10, 0, g);
-	
+		this.player = new Player(10,0, this.playerLives, g);
 	}
 	
 	private void levelFour(GameComponent g) {
@@ -171,11 +173,11 @@ public class Level extends JComponent{
 		this.enemies.add(new Goose(400, 200, 5, 0, g));
 		
 		//player
-		this.player = new Player(10, 0, g);
-		
-	}
+		this.player = new Player(10,0, this.playerLives, g);
+		}
 	
 	private void gameWin(GameComponent g) {
+		this.background = new Background(5);
 
 	}
 	
@@ -183,7 +185,7 @@ public class Level extends JComponent{
 		this.background = new Background(6);
 
 		//player
-		this.player = new Player(10, 0, g);
+		this.player = new Player(10, 0, 3, g);
 		this.button = new Button(250, 600, 500, 70, "Press Enter to Restart", g);
 	}
 	

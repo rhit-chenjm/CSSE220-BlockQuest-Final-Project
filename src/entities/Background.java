@@ -75,10 +75,20 @@ public class Background implements Drawable {
 			
 			break;
 			
+		case 5:
+			
+			try {
+				this.image = ImageIO.read(Platform.class.getResource("GameWin.jpg"));
+	            imageLoaded = (image != null);
+	        } catch (IOException | IllegalArgumentException ex) {
+	            imageLoaded = false; 
+	        }
+			
+			break;
+			
 		case 6:
 			
 			try {
-				// Winter Background
 				this.image = ImageIO.read(Platform.class.getResource("GameOver.jpg"));
 	            imageLoaded = (image != null);
 	        } catch (IOException | IllegalArgumentException ex) {
