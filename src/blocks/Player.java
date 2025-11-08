@@ -159,14 +159,14 @@ public class Player extends GameObject {
 	}
 	@Override
 	public void collideWithPlatform( Platform other) {
-		System.out.println(other.getBoundingBox().getMinX()); //250
-		System.out.println(other.getBoundingBox().getMaxX()); //250
-
-		System.out.println(other.getBoundingBox().getMaxY()); //420
-
-		System.out.println(r1.getMaxX()); //90 //351
-		System.out.println(r1.getMaxY()); // 180 //422
-		System.out.println(r1.getMinX()); // 10 //271
+//		System.out.println(other.getBoundingBox().getMinX()); //250
+//		System.out.println(other.getBoundingBox().getMaxX()); //250
+//
+//		System.out.println(other.getBoundingBox().getMaxY()); //420
+//
+//		System.out.println(r1.getMaxX()); //90 //351
+//		System.out.println(r1.getMaxY()); // 180 //422
+//		System.out.println(r1.getMinX()); // 10 //271
 
 
 		if(other.getBoundingBox().getMinX() > r1.getMaxX() &&
