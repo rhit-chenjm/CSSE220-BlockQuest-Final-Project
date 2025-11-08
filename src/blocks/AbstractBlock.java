@@ -13,7 +13,6 @@ import entities.Platform;
  */
 public abstract class AbstractBlock extends GameObject {
 	
-	
 	public int gravity = 0;
 
 	public AbstractBlock(int x, int y, int xVelocity, int yVelocity, GameComponent gameComponent, int width, int height) {
@@ -40,8 +39,5 @@ public abstract class AbstractBlock extends GameObject {
 				else this.gravity = 3;
 			}
 		}
-		
 	}
-	
-
 }

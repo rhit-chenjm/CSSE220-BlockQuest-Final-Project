@@ -39,10 +39,9 @@ public class Level extends JComponent{
 	private Collectable testHighCollectable;
 	private Collectable testLowCollectable;
 	private int levelNumber;
+	private Button button;
 
-	
 	private Background background;
-	
 	
 	private JLabel label = new JLabel();
 	private int numBalls = 0;
@@ -119,7 +118,6 @@ public class Level extends JComponent{
 		this.enemies.add(new Goose(130, 150, 0, 5, g));
 		this.enemies.add(new Goose(230, 200, 0, 5, g));
 		this.player =  new Player(10, 0, g);
-	
 	}
 	
 	private void levelTwo(GameComponent g) {
@@ -174,6 +172,7 @@ public class Level extends JComponent{
 		
 		//player
 		this.player = new Player(10, 0, g);
+		
 	}
 	
 	private void gameWin(GameComponent g) {
@@ -183,57 +182,14 @@ public class Level extends JComponent{
 	private void gameOver(GameComponent g) {
 		this.background = new Background(6);
 
-//		//player
-//		this.player = new Player(10, 0, g);
-//		JFrame frame = new JFrame();
-//
-//		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 6));
-//		JButton addBall = new JButton("Add Ball");
-//		JButton addStrike = new JButton("Add Strike");
-//
-//		frame.add(label, BorderLayout.CENTER);
-//		frame.add(panel, BorderLayout.SOUTH);
-//
-//		panel.setLayout(new FlowLayout());
-//		panel.setPreferredSize(new Dimension(300, 60));
-//
-//		addBall.addActionListener(e -> {
-//			if (numBalls < 3) {
-//				numBalls++;
-//			} else {
-//				numBalls = 0;
-//				numStrikes = 0;
-//			}
-//
-//			this.updateLabel(numBalls, numStrikes);
-//		});
-//
-//		addStrike.addActionListener(e -> {
-//			if (numStrikes < 2) {
-//				numStrikes++;
-//			} else {
-//				numBalls = 0;
-//				numStrikes = 0;
-//			}
-//
-//			this.updateLabel(numBalls, numStrikes);
-//		});
-//
-//		panel.add(addBall);
-//		panel.add(addStrike);
-//
-//		// The following line is given to show you how to use the given method:
-//		updateLabel(0, 0);
-//
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.pack();
-//		frame.setVisible(true);
+		//player
+		this.player = new Player(10, 0, g);
+		this.button = new Button(250, 600, 500, 70, "Press Enter to Restart", g);
 	}
 	
 	public void drawOn(Graphics2D g2) {
 		background.drawOn(g2);
 		if(this.levelNumber < 5) {
-			
 			
 			for (Enemy enemy : this.enemies) {
 				enemy.drawOn(g2);
@@ -248,6 +204,9 @@ public class Level extends JComponent{
 				collectable.drawOn(g2);
 			}
 		}
+		
+		if (this.button != null) this.button.drawOn(g2);
+
 	}
 	
 	public Player getPlayer() {

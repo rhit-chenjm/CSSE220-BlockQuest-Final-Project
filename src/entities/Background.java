@@ -16,7 +16,7 @@ public class Background implements Drawable {
     private int levelID;
     
     private final int WIDTH = 1000;
-    private final int HEIGHT = 1000;
+    private final int HEIGHT = 900;
     
     public Background(int levelID) {
     	this.levelID = levelID;

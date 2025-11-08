@@ -61,6 +61,12 @@ public class GamePanel extends JPanel {
                     case KeyEvent.VK_DOWN:
                     	canvas.playerCanCollect(true);
                     	break;
+                    case KeyEvent.VK_ENTER:
+                    	// If game over:
+                    	if (canvas.getLevel() == 6)
+                    	// Restart game.
+                    	canvas.pressButton();
+                    	break;
                     default:
                     	// No key is matched.
                     	throw new InputMismatchException("Wrong key!");

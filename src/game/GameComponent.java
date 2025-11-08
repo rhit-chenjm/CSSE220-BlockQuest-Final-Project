@@ -224,4 +224,12 @@ public class GameComponent extends JComponent {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+	
+	public void pressButton() {
+		setLevel(1);
+	}
+	
+	public int getLevel() {
+		return this.level.getLevelNumber();
+	}
 } 
