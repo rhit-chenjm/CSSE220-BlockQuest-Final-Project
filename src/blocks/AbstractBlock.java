@@ -37,7 +37,7 @@ public abstract class AbstractBlock extends GameObject {
 					this.gravity = 0;
 					eChangedGravity = true;
 				}
-				else this.gravity = 1;
+				else this.gravity = 3;
 			}
 		}
 		
