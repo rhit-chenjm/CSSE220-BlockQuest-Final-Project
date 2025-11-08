@@ -75,6 +75,7 @@ public class Player extends GameObject {
 			this.y = super.gameComponent.getHeight()-super.height;
 
 		}
+		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
 		if(isTouchingPlatform) {
 			if (xVelocity >= 0) {
 				xVelocity -= 0.01;
@@ -158,6 +159,32 @@ public class Player extends GameObject {
 	}
 	@Override
 	public void collideWithPlatform( Platform other) {
+		System.out.println(other.getBoundingBox().getMinX()); //250
+		System.out.println(other.getBoundingBox().getMaxX()); //250
+
+		System.out.println(other.getBoundingBox().getMaxY()); //420
+
+		System.out.println(r1.getMaxX()); //90 //351
+		System.out.println(r1.getMaxY()); // 180 //422
+		System.out.println(r1.getMinX()); // 10 //271
+
+
+		if(other.getBoundingBox().getMinX() > r1.getMaxX() &&
+				other.getBoundingBox().getMaxY() < r1.getMaxY() &&
+				other.getBoundingBox().getMaxY() > r1.getMinY()
+) {
+			System.out.println("hit");
+			this.xVelocity *= -1;
+		}
+		if(other.getBoundingBox().getMaxX() < r1.getMinX() &&
+				other.getBoundingBox().getMaxY() < r1.getMaxY() &&
+				other.getBoundingBox().getMaxY() > r1.getMinY()
+) {
+			this.xVelocity *= -1;
+			System.out.println("hit");
+
+		}
+		System.out.println("ran");
 		if(other.collidesWith(r1)) {
 			isTouchingPlatform = true;
 		}else {
@@ -170,7 +197,8 @@ public class Player extends GameObject {
 			this.y -= 1;
 			this.yVelocity = 5;
 			this.gravity = 1;
-		}
+		} 
+
 
 	}
 	public boolean isTouchingPlatform() {
