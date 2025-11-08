@@ -47,15 +47,15 @@ public class GamePanel extends JPanel {
             	// player controls by switch case
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT: 
-                        canvas.setPlayerXSpeed(-2);
+                        canvas.setPlayerXSpeed(-4);
                         canvas.playerCanCollect(false);
                         break;
                     case KeyEvent.VK_RIGHT: 
-                    	canvas.setPlayerXSpeed(2);
+                    	canvas.setPlayerXSpeed(4);
                     	canvas.playerCanCollect(false);
                     	break;
                     case KeyEvent.VK_UP: 
-                    	canvas.setPlayerYSpeed(-2);
+                    	canvas.setPlayerYSpeed(-4);
                     	canvas.playerCanCollect(false);
                     	break;
                     case KeyEvent.VK_DOWN:

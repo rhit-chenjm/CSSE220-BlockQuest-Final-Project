@@ -21,7 +21,7 @@ import game.GameObject;
  */
 public class Player extends GameObject {
 	
-	public int gravity = 1;
+	public int gravity = 3;
 	public boolean isHoldingDown = true;
 	public static final int SIZE = 80;
 	private static final int STARTING_DX = 0;
@@ -234,7 +234,7 @@ public class Player extends GameObject {
 					this.gravity = 0;
 					pChangedGravity = true;
 				}
-				else this.gravity = 1;
+				else this.gravity = 3;
 			}
 		}
 		
