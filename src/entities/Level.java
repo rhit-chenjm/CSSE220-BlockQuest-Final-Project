@@ -118,7 +118,7 @@ public class Level extends JComponent{
 		this.collectables.add(this.testLowCollectable);
 		this.collectables.add(this.testHighCollectable);
 		this.enemies.add(new Goose(200, 100, 5, 0, g));
-		this.enemies.add(new Goose(30,  100, 0, 5, g));
+		this.enemies.add(new Goose(300,  100, 0, 5, g));
 		this.enemies.add(new Goose(130, 150, 0, 5, g));
 		this.enemies.add(new Goose(230, 200, 0, 5, g));
 
@@ -136,7 +136,7 @@ public class Level extends JComponent{
 		this.testHighCollectable = new DollarBill(300, 80, 0, 0, g);
 		this.collectables.add(this.testLowCollectable);
 		this.collectables.add(this.testHighCollectable);
-		this.enemies.add(new Goose(200, 100, 5, 0, g));
+		this.enemies.add(new Goose(200, 80, 5, 0, g));
 		this.player = new Player(10,0, this.playerLives, this.playerScore, g);
 
 	}
@@ -155,8 +155,8 @@ public class Level extends JComponent{
 		this.collectables.add(new Coin(500, 600, 0, 0, g));
 		this.collectables.add(new DollarBill(150, 300, 0, 0, g));
 		//enemies
-		this.enemies.add(new Goose(100, 200, 5, 0, g));
-		this.enemies.add(new Goose(500, 600, 0, 5, g));
+		this.enemies.add(new Goose(100, 150, 5, 0, g));
+		this.enemies.add(new Goose(550, 400, 5, 5, g));
 		//player
 		this.player = new Player(10,0, this.playerLives, this.playerScore, g);
 	}

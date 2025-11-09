@@ -175,7 +175,6 @@ public class GameComponent extends JComponent {
 	
 	public void setIsCollidingWithPlatform(boolean b1) {
 		this.getPlayer().setTouchingPlatform(b1);
-		System.out.println(b1);
 		}
 	
 	public void setPlayerYSpeed(int i) {

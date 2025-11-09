@@ -75,7 +75,7 @@ public class Collectable extends AbstractBlock {
 	public boolean isAlive() {
 		if(this.health < 1) {
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 	}
