@@ -106,37 +106,65 @@ public class Level extends JComponent{
 		
 	}
 	private void levelOne(GameComponent g) {
+		//background
 		this.background = new Background(1);
+		//platforms
 		this.testPlatform = new Platform(30, 200, 200, 20);
 		this.lowTestPlatform = new Platform(250, 400, 300, 20);
 		this.floor = new Platform(-10, 750, 1020, 50);
 		this.platforms.add(this.testPlatform);
 		this.platforms.add(this.lowTestPlatform);
 		this.platforms.add(this.floor);
+		this.platforms.add(new Platform(400, 550, 300, 20));
+		this.platforms.add(new Platform(700, 150, 400, 20));
+		this.platforms.add(new Platform(750, 450, 200, 20));
+		//collectables
 	 	this.testLowCollectable = new Coin(300, 100, 0, 0, g);
 		this.testHighCollectable = new DollarBill(100, 80, 0, 0, g);
 		this.collectables.add(this.testLowCollectable);
 		this.collectables.add(this.testHighCollectable);
+		this.collectables.add(new DollarBill(600, 475, 0, 0, g));
+		this.collectables.add(new Coin(675, 525, 0, 0, g));
+		this.collectables.add(new Coin(800, 100, 0, 0, g));
+		//enemies
 		this.enemies.add(new Goose(200, 100, 5, 0, g));
 		this.enemies.add(new Goose(300,  100, 0, 5, g));
 		this.enemies.add(new Goose(130, 150, 0, 5, g));
 		this.enemies.add(new Goose(230, 200, 0, 5, g));
-
+		this.enemies.add(new Goose(600, 1000, 0, 5, g));
+		//player
 		this.player = new Player(10, 0, 3,0, g);
 	}
 	
 	private void levelTwo(GameComponent g) {
+		//background
 		this.background = new Background(2);
+		//platforms
 		this.testPlatform = new Platform(400, 200, 300, 20);
 		this.lowTestPlatform = new Platform(100, 200, 300, 20);
 		this.floor = new Platform(-10, 750, 1020, 50);
 		this.platforms.add(this.testPlatform);
 		this.platforms.add(this.floor);
+		this.platforms.add(new Platform(850, 500, 400, 20));
+		this.platforms.add(new Platform(200, 700, 600, 20));
+		this.platforms.add(new Platform(0, 300, 500, 20));
+		this.platforms.add(new Platform(800, 150, 200, 20));
+		//collectables
 	 	this.testLowCollectable = new Coin(100, 100, 0, 0, g);
 		this.testHighCollectable = new DollarBill(300, 80, 0, 0, g);
 		this.collectables.add(this.testLowCollectable);
 		this.collectables.add(this.testHighCollectable);
+		this.collectables.add(new Coin(800, 450, 0, 0, g));
+		this.collectables.add(new DollarBill(900, 400, 0, 0, g));
+		this.collectables.add(new DollarBill(300, 600, 0, 0, g));
+		this.collectables.add(new Coin(850, 100, 0, 0, g));
+		//enemies
 		this.enemies.add(new Goose(200, 80, 5, 0, g));
+		this.enemies.add(new Goose(900, 100, 0, 5, g));
+		this.enemies.add(new Goose(800, 150, 5, 0, g));
+		this.enemies.add(new Goose(400, 275, 5, 0, g));
+		
+		//player
 		this.player = new Player(10,0, this.playerLives, this.playerScore, g);
 
 	}
@@ -149,14 +177,20 @@ public class Level extends JComponent{
 		this.platforms.add(new Platform(50, 50, 100, 20));
 		this.platforms.add(new Platform(600, 100, 600, 20));
 		this.platforms.add(new Platform(100, 200, 300, 20));
-		this.platforms.add(new Platform(-10, 750, 1020, 50));
+		this.platforms.add(new Platform(-10, 750, 1020, 50)); //floor
+		this.platforms.add(new Platform(800, 300, 550, 20));
 		//collectables
 		this.collectables.add(new Coin(350, 550, 0, 0, g));
 		this.collectables.add(new Coin(500, 600, 0, 0, g));
 		this.collectables.add(new DollarBill(150, 300, 0, 0, g));
+		this.collectables.add(new DollarBill(850, 250, 0, 0, g));
+		this.collectables.add(new Coin(625, 50, 0, 0, g));
 		//enemies
 		this.enemies.add(new Goose(100, 150, 5, 0, g));
 		this.enemies.add(new Goose(550, 400, 5, 5, g));
+		this.enemies.add(new Goose(800, 50, 0, 5, g));
+		this.enemies.add(new Goose(20, 700, 0, 5, g));
+		this.enemies.add(new Goose(20, 700, 5, 0, g));
 		//player
 		this.player = new Player(10,0, this.playerLives, this.playerScore, g);
 	}
@@ -168,11 +202,24 @@ public class Level extends JComponent{
 		this.platforms.add(new Platform(675, 400, 800, 20));
 		this.platforms.add(new Platform(200, 100, 300, 20));
 		this.platforms.add(new Platform(50, 600, 900, 20));
+		this.platforms.add(new Platform(800, 200, 600, 20));
+		this.platforms.add(new Platform(0, 800, 300, 20));
 		//collectables
 		this.collectables.add(new Coin(500, 500, 0, 0, g));
+		this.collectables.add(new Coin(150, 750, 0, 0, g));
+		this.collectables.add(new DollarBill(300, 700, 0, 0, g));
+		this.collectables.add(new Coin(100, 500, 0, 0, g));
+		this.collectables.add(new DollarBill(850, 100, 0, 0, g));
+		this.collectables.add(new Coin(800, 300, 0, 0, g));
 		
 		//enemies
 		this.enemies.add(new Goose(400, 200, 5, 0, g));
+		this.enemies.add(new Goose(900, 250, 0, 5, g));
+		this.enemies.add(new Goose(300, 400, 5, 0, g));
+		this.enemies.add(new Goose(900, 10, 5, 0, g));
+		this.enemies.add(new Goose(200, 500, 5, 0, g));
+		this.enemies.add(new Goose(100, 700, 5, 0, g));
+		this.enemies.add(new Goose(50, 50, 5, 0, g));
 		
 		//player
 		this.player = new Player(10,0, this.playerLives, this.playerScore, g);
