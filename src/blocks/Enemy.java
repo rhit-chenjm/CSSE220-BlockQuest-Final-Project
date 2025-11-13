@@ -47,11 +47,11 @@ public class Enemy extends AbstractBlock implements Drawable {
 	public void update() {
 		if ( isOffScreen() == 1 ) {
 			this.xVelocity = -this.xVelocity;
-			this.yVelocity = this.yVelocity-4;
+			this.yVelocity = this.yVelocity-8;
 			this.x = 0;
 		} else if(isOffScreen() == 2) {
 			this.xVelocity = -this.xVelocity;
-			this.yVelocity = this.yVelocity-4;
+			this.yVelocity = this.yVelocity-8;
 			this.x = super.gameComponent.getWidth()-super.width;
 		} else if(isOffScreen() == 3) {
 			this.yVelocity = -this.yVelocity;

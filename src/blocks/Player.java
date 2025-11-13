@@ -77,9 +77,9 @@ public class Player extends GameObject {
 		r1 = new Rectangle((int) super.x, (int) super.y, SIZE, SIZE);
 		if (isTouchingPlatform) {
 			if (xVelocity >= 0) {
-				xVelocity -= 0.01;
+				xVelocity -= 0.02;
 			} else {
-				xVelocity += 0.01;
+				xVelocity += 0.02;
 			}
 		}
 
