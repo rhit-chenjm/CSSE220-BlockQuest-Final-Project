@@ -140,14 +140,14 @@ public class Level extends JComponent{
 		//background
 		this.background = new Background(2);
 		//platforms
-		this.testPlatform = new Platform(400, 200, 300, 20);
-		this.lowTestPlatform = new Platform(100, 200, 300, 20);
+		this.testPlatform = new Platform(300, 200, 300, 20);
+		//this.lowTestPlatform = new Platform(100, 200, 300, 20);
 		this.floor = new Platform(-10, 750, 1020, 50);
 		this.platforms.add(this.testPlatform);
 		this.platforms.add(this.floor);
 		this.platforms.add(new Platform(850, 500, 400, 20));
 		this.platforms.add(new Platform(200, 700, 600, 20));
-		this.platforms.add(new Platform(0, 300, 500, 20));
+		this.platforms.add(new Platform(0, 300, 300, 20));
 		this.platforms.add(new Platform(800, 150, 200, 20));
 		//collectables
 	 	this.testLowCollectable = new Coin(100, 100, 0, 0, g);
@@ -201,15 +201,15 @@ public class Level extends JComponent{
 		//platforms
 		this.platforms.add(new Platform(675, 400, 800, 20));
 		this.platforms.add(new Platform(200, 100, 300, 20));
-		this.platforms.add(new Platform(50, 600, 900, 20));
+		this.platforms.add(new Platform(50, 600, 700, 20));
 		this.platforms.add(new Platform(800, 200, 600, 20));
 		this.platforms.add(new Platform(0, 800, 300, 20));
+		this.platforms.add(new Platform(-10, 750, 1020, 50));
 		//collectables
 		this.collectables.add(new Coin(500, 500, 0, 0, g));
 		this.collectables.add(new Coin(150, 750, 0, 0, g));
 		this.collectables.add(new DollarBill(300, 700, 0, 0, g));
 		this.collectables.add(new Coin(100, 500, 0, 0, g));
-		this.collectables.add(new DollarBill(850, 100, 0, 0, g));
 		this.collectables.add(new Coin(800, 300, 0, 0, g));
 		
 		//enemies
