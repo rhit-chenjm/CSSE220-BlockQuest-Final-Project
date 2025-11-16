@@ -109,5 +109,8 @@ public class Background implements Drawable {
     	    g2.setColor(Color.PINK);
     		g2.fill(new Rectangle(0, 0, WIDTH, HEIGHT));
     	}
+		
+		g2.setColor(Color.BLACK);
+		g2.fill(new Rectangle(5, 3, 100, 50));
 	}
 }

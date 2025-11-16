@@ -18,7 +18,7 @@ public class Main {
 	public static final int DELAY=10;
 	
 	public static void main(String[] args) {
-		final JFrame frame = new JFrame("Goose Game");
+		final JFrame frame = new JFrame("RHIT Student Simulator");
 		
 		//New code
 		frame.setLayout(new BorderLayout());
